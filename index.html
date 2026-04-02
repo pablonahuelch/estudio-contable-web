@@ -1,25 +1,749 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Estudio Contable</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CPN² Soluciones Tecnológicas</title>
   <style>
-    body {
-      font-family: Arial;
-      text-align: center;
-      margin-top: 100px;
-      background: #f4f6f9;
+    :root {
+      --bg: #05070d;
+      --bg-2: #0a1020;
+      --panel: rgba(10, 16, 32, 0.82);
+      --panel-strong: rgba(7, 12, 24, 0.92);
+      --line: rgba(0, 234, 255, 0.14);
+      --text: #f5faff;
+      --muted: #b9c3d8;
+      --cyan: #00eaff;
+      --blue: #1f8fff;
+      --violet: #7a3cff;
+      --magenta: #d62bff;
+      --white-soft: rgba(255,255,255,0.08);
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.42);
+      --radius: 24px;
+      --radius-sm: 18px;
+      --max: 1240px;
     }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 15%, rgba(214, 43, 255, 0.14), transparent 22%),
+        radial-gradient(circle at 80% 10%, rgba(0, 234, 255, 0.16), transparent 20%),
+        radial-gradient(circle at 50% 100%, rgba(31, 143, 255, 0.12), transparent 28%),
+        linear-gradient(180deg, #03050a 0%, #070b14 40%, #09101c 100%);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(14px);
+      background: rgba(3, 7, 14, 0.76);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      width: 56px;
+      height: 56px;
+      object-fit: cover;
+      border-radius: 16px;
+      background: #000;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.02),
+        0 0 24px rgba(0, 234, 255, 0.12);
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      min-width: 0;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 1rem;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand-text small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.95rem;
+      padding: 10px 14px;
+      border-radius: 999px;
+      transition: 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: .22s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      color: #041019;
+      background: linear-gradient(135deg, var(--cyan), var(--blue) 55%, var(--violet));
+      box-shadow: 0 12px 34px rgba(0, 234, 255, 0.18);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.03);
+      border-color: rgba(255,255,255,0.08);
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 56px 0 34px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .hero-card,
+    .panel,
+    .service-card,
+    .value-card,
+    .stat,
+    .cta {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      padding: 38px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015)),
+        rgba(10, 16, 32, 0.86);
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      right: -90px;
+      top: -90px;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(122, 60, 255, 0.22), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      left: -100px;
+      bottom: -100px;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 234, 255, 0.14), transparent 70%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      color: var(--cyan);
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
     h1 {
-      color: #2c3e50;
+      font-size: clamp(2.3rem, 5vw, 4.7rem);
+      line-height: 1.03;
+      margin-bottom: 18px;
+      letter-spacing: -1.8px;
+      max-width: 840px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--magenta), var(--violet), var(--cyan));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      max-width: 780px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      margin-bottom: 26px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .hero-points {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .stat {
+      min-height: 112px;
+      padding: 18px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .stat strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.08rem;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 18px;
+    }
+
+    .panel {
+      padding: 28px;
+      background: var(--panel-strong);
+    }
+
+    .panel h3 {
+      font-size: 1.24rem;
+      margin-bottom: 12px;
+    }
+
+    .panel p {
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .check-list {
+      list-style: none;
+      padding: 0;
+      margin: 18px 0 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .check-list li {
+      position: relative;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .check-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
+      box-shadow: 0 0 0 4px rgba(0, 234, 255, 0.10);
+    }
+
+    section {
+      padding: 26px 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: end;
+      margin-bottom: 24px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.9rem, 4vw, 2.9rem);
+      margin-bottom: 10px;
+      letter-spacing: -0.9px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      max-width: 760px;
+      margin-bottom: 0;
+    }
+
+    .values {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .value-card {
+      padding: 26px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015)),
+        rgba(10, 16, 32, 0.84);
+    }
+
+    .icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+      font-weight: 800;
+      color: var(--text);
+      background: linear-gradient(135deg, rgba(214,43,255,.18), rgba(0,234,255,.12));
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+    }
+
+    .value-card p {
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .service-card {
+      padding: 26px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015)),
+        rgba(10, 16, 32, 0.84);
+    }
+
+    .service-card h3 {
+      font-size: 1.14rem;
+      margin-bottom: 14px;
+    }
+
+    .service-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .service-card li {
+      color: var(--muted);
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .service-card li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
+      box-shadow: 0 0 0 4px rgba(122, 60, 255, 0.08);
+    }
+
+    .cta {
+      padding: 34px;
+      margin-top: 10px;
+      background:
+        linear-gradient(135deg, rgba(214,43,255,.08), rgba(0,234,255,.08)),
+        rgba(10, 16, 32, 0.86);
+    }
+
+    .cta h2 {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      margin-bottom: 14px;
+    }
+
+    .cta p {
+      color: var(--muted);
+      max-width: 780px;
+      margin-bottom: 24px;
+    }
+
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .contact-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .contact-card strong {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .contact-card span {
+      display: block;
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    footer {
+      padding: 28px 0 42px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .values,
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-points {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .nav-links {
+        justify-content: center;
+      }
+
+      .hero {
+        padding-top: 36px;
+      }
+
+      .hero-card,
+      .panel,
+      .value-card,
+      .service-card,
+      .cta {
+        padding: 22px;
+      }
+
+      .section-head {
+        align-items: start;
+      }
+
+      .contact-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .contact-card,
+      .btn {
+        width: 100%;
+      }
+
+      .brand-logo {
+        width: 50px;
+        height: 50px;
+      }
     }
   </style>
 </head>
 <body>
+  <header class="topbar">
+    <div class="container nav">
+      <div class="brand">
+        <img src="Logo1.png" alt="Logo CPN² Soluciones Tecnológicas" class="brand-logo" />
+        <div class="brand-text">
+          <strong>CPN² Soluciones Tecnológicas</strong>
+          <small>Contabilidad, automatización e innovación profesional</small>
+        </div>
+      </div>
 
-  <h1>Estudio Contable</h1>
-  <p>Bienvenido a nuestro sitio web</p>
-  <p>Estamos trabajando para brindarte el mejor servicio</p>
+      <nav class="nav-links">
+        <a href="#vision">Visión</a>
+        <a href="#mision">Misión</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
 
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-card">
+          <div class="eyebrow">Estudio moderno • soluciones contables • tecnología aplicada</div>
+          <h1>Tu estudio contable con una <span class="gradient-text">mentalidad digital</span>.</h1>
+          <p class="lead">
+            Combinamos asesoramiento profesional, estrategia y automatización para que cada cliente tenga una gestión más clara, rápida y eficiente. Menos tareas repetitivas, más control, más orden y mejores decisiones.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://wa.me/5493838473620" target="_blank" rel="noopener noreferrer">Contactar por WhatsApp</a>
+            <a class="btn btn-secondary" href="#servicios">Ver servicios</a>
+          </div>
+
+          <div class="hero-points">
+            <div class="stat">
+              <strong>Asesoramiento integral</strong>
+              <span>Impositivo, contable, societario y administrativo con enfoque práctico.</span>
+            </div>
+            <div class="stat">
+              <strong>Automatización real</strong>
+              <span>Procesos más ágiles, menos errores y mejor seguimiento de la información.</span>
+            </div>
+            <div class="stat">
+              <strong>Visión de crecimiento</strong>
+              <span>No solo cumplimos obligaciones: ayudamos a ordenar, optimizar y proyectar.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-side">
+          <div class="panel" id="vision">
+            <h3>Visión</h3>
+            <p>
+              Ser un estudio contable alineado con la nueva era tecnológica, acercando a cada cliente una gestión más inteligente, moderna y conectada. Buscamos que la información esté disponible a tiempo, que los procesos sean simples y que las decisiones se apoyen en herramientas actuales y datos claros.
+            </p>
+          </div>
+
+          <div class="panel" id="mision">
+            <h3>Misión</h3>
+            <p>
+              Brindar el mejor asesoramiento profesional con una fuerte base tecnológica, integrando automatización, seguimiento y acompañamiento personalizado. Queremos que cada cliente tenga respuestas ágiles, procesos ordenados y soluciones que reduzcan tiempos y mejoren el control.
+            </p>
+            <ul class="check-list">
+              <li>Atención profesional cercana, clara y orientada a resultados.</li>
+              <li>Servicios contables e impositivos adaptados a cada realidad.</li>
+              <li>Tecnología aplicada para simplificar tareas y optimizar recursos.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Cómo trabajamos</h2>
+            <p>
+              Entendemos la profesión contable como una combinación de conocimiento técnico, orden administrativo y herramientas digitales. Por eso unimos cumplimiento, planificación, automatización y acompañamiento estratégico en una propuesta integral.
+            </p>
+          </div>
+        </div>
+
+        <div class="values">
+          <article class="value-card">
+            <div class="icon">C</div>
+            <h3>Claridad</h3>
+            <p>Traducimos lo técnico en soluciones concretas, simples de entender y fáciles de aplicar.</p>
+          </article>
+
+          <article class="value-card">
+            <div class="icon">P</div>
+            <h3>Precisión</h3>
+            <p>Buscamos procesos ordenados, información confiable y control real sobre cada gestión.</p>
+          </article>
+
+          <article class="value-card">
+            <div class="icon">N²</div>
+            <h3>Innovación profesional</h3>
+            <p>Incorporamos automatización y herramientas digitales sin perder criterio ni cercanía.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicios">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Servicios</h2>
+            <p>
+              Reunimos gestión contable, impositiva, societaria, administrativa y tecnológica para acompañar a personas, comercios, emprendimientos y empresas desde una visión más moderna y eficiente.
+            </p>
+          </div>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card">
+            <h3>Inscripciones y actualizaciones</h3>
+            <ul>
+              <li>Altas y bajas en AFIP, provincia y municipio.</li>
+              <li>Actualización de datos registrales.</li>
+              <li>Puntos de venta y modificaciones fiscales.</li>
+              <li>Regularización administrativa.</li>
+            </ul>
+          </article>
+
+          <article class="service-card">
+            <h3>Gestión fiscal y municipal</h3>
+            <ul>
+              <li>Habilitaciones municipales.</li>
+              <li>Controladores fiscales y trámites especiales.</li>
+              <li>Empadronamientos y recategorizaciones.</li>
+              <li>Gestiones ante organismos públicos.</li>
+            </ul>
+          </article>
+
+          <article class="service-card">
+            <h3>Regularización y defensa</h3>
+            <ul>
+              <li>Planes de pago y moratorias.</li>
+              <li>Recursos administrativos.</li>
+              <li>Exenciones impositivas.</li>
+              <li>Ordenamiento documental y seguimiento.</li>
+            </ul>
+          </article>
+
+          <article class="service-card">
+            <h3>Impuestos y presentaciones</h3>
+            <ul>
+              <li>IVA, IIBB y Convenio Multilateral.</li>
+              <li>Bienes Personales.</li>
+              <li>Acciones y participaciones societarias.</li>
+              <li>Regímenes informativos mensuales y anuales.</li>
+            </ul>
+          </article>
+
+          <article class="service-card">
+            <h3>Automatización y control</h3>
+            <ul>
+              <li>Optimización de procesos administrativos.</li>
+              <li>Automatizaciones para estudios y empresas.</li>
+              <li>Seguimiento de información y reportes.</li>
+              <li>Integración con herramientas digitales.</li>
+            </ul>
+          </article>
+
+          <article class="service-card">
+            <h3>Soporte estratégico</h3>
+            <ul>
+              <li>Asesoramiento financiero.</li>
+              <li>Constitución y armado de sociedades.</li>
+              <li>Diseño web y soluciones digitales.</li>
+              <li>Acompañamiento profesional para crecer mejor.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="container">
+        <div class="cta">
+          <h2>Asesoramiento profesional con tecnología aplicada.</h2>
+          <p>
+            Si buscás ordenar tu gestión, resolver trámites, optimizar procesos o avanzar hacia una estructura más moderna, estamos preparados para acompañarte con soluciones concretas y atención profesional.
+          </p>
+
+          <div class="contact-row">
+            <a class="contact-card" href="tel:+5493838473620">
+              <div>
+                <strong>Teléfono de contacto</strong>
+                <span>+54 9 3838 47-3620</span>
+              </div>
+            </a>
+
+            <a class="btn btn-primary" href="https://wa.me/5493838473620" target="_blank" rel="noopener noreferrer">
+              Escribir por WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      CPN² Soluciones Tecnológicas · Contabilidad, automatización e innovación para una gestión más inteligente.
+    </div>
+  </footer>
 </body>
 </html>
