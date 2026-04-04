@@ -379,20 +379,27 @@
     }
 
 .icon {
-  width: 54px;
-  height: 54px;
-  border-radius: 18px;
-  display: grid;
-  place-items: center;
+  width: auto;
+  height: auto;
+  display: inline-block;
   margin-bottom: 16px;
-  font-weight: 800;
-  color: #ffffff;
-  background: linear-gradient(135deg, #d62bff 0%, #7a3cff 45%, #1f8fff 72%, #00eaff 100%);
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow:
-    0 10px 24px rgba(0, 234, 255, 0.12),
-    0 8px 20px rgba(122, 60, 255, 0.18),
-    inset 0 0 0 1px rgba(255,255,255,0.04);
+
+  font-size: 2.4rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -1px;
+
+  color: transparent;
+  background: linear-gradient(135deg, #d62bff 0%, #7a3cff 40%, #1f8fff 72%, #00eaff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  text-shadow:
+    0 0 12px rgba(122, 60, 255, 0.25),
+    0 0 18px rgba(0, 234, 255, 0.18);
+
+  border: none;
+  box-shadow: none;
 }
 
     .value-card p {
@@ -727,25 +734,25 @@
           </div>
         </div>
 
-        <div class="values">
-          <article class="value-card">
-            <div class="icon">C</div>
-            <h3>Claridad</h3>
-            <p>Traducimos lo técnico en soluciones concretas, simples de entender y fáciles de aplicar.</p>
-          </article>
+<div class="values">
+  <article class="value-card">
+    <div class="icon">C</div>
+    <h3>Claridad</h3>
+    <p>Traducimos lo técnico en soluciones concretas, simples de entender y fáciles de aplicar.</p>
+  </article>
 
-          <article class="value-card">
-            <div class="icon">P</div>
-            <h3>Precisión</h3>
-            <p>Buscamos procesos ordenados, información confiable y control real sobre cada gestión.</p>
-          </article>
+  <article class="value-card">
+    <div class="icon">P</div>
+    <h3>Precisión</h3>
+    <p>Buscamos procesos ordenados, información confiable y control real sobre cada gestión.</p>
+  </article>
 
-          <article class="value-card">
-            <div class="icon">N²</div>
-            <h3>Innovación profesional</h3>
-            <p>Incorporamos automatización y herramientas digitales sin perder criterio ni cercanía.</p>
-          </article>
-        </div>
+  <article class="value-card">
+    <div class="icon">N²</div>
+    <h3>Innovación profesional</h3>
+    <p>Incorporamos automatización y herramientas digitales sin perder criterio ni cercanía.</p>
+  </article>
+</div>
       </div>
     </section>
 
