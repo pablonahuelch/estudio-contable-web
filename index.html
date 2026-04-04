@@ -449,15 +449,47 @@
       text-align: center;
     }
 
-    .floating-whatsapp {
+    .floating-contact {
       position: fixed;
       right: 18px;
       bottom: 18px;
       z-index: 60;
       display: flex;
       flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+    }
+
+    .contact-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 18px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--wa), var(--wa-dark));
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      box-shadow: 0 16px 36px rgba(37, 211, 102, 0.28);
+      transition: 0.25s ease;
+    }
+
+    .contact-toggle:hover {
+      transform: translateY(-2px);
+    }
+
+    .floating-whatsapp {
+      display: flex;
+      flex-direction: column;
       gap: 12px;
       max-width: 320px;
+    }
+
+    .floating-whatsapp.hidden {
+      display: none;
     }
 
     .wa-bubble {
@@ -489,6 +521,7 @@
       background: linear-gradient(135deg, var(--wa), var(--wa-dark));
       color: #fff;
       box-shadow: 0 10px 20px rgba(37, 211, 102, 0.24);
+      font-size: 1.1rem;
     }
 
     .wa-text {
@@ -507,12 +540,6 @@
       font-size: 0.82rem;
       color: var(--muted);
       margin-top: 2px;
-    }
-
-    .wa-svg {
-      width: 22px;
-      height: 22px;
-      fill: currentColor;
     }
 
     @media (max-width: 1080px) {
@@ -558,10 +585,18 @@
         height: 50px;
       }
 
-      .floating-whatsapp {
+      .floating-contact {
         right: 12px;
         left: 12px;
         bottom: 12px;
+        align-items: stretch;
+      }
+
+      .contact-toggle {
+        width: 100%;
+      }
+
+      .floating-whatsapp {
         max-width: none;
       }
 
@@ -791,42 +826,56 @@
     </div>
   </footer>
 
-  <div class="floating-whatsapp">
-    <a
-      class="wa-bubble"
-      href="https://wa.me/5493838473620?text=Hola%2C%20solicito%20informaci%C3%B3n%20sobre%20los%20servicios%20de%20CPN%C2%B2%20Soluciones%20Tecnol%C3%B3gicas."
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Escribir por WhatsApp a CPN Chaile Pablo"
-    >
-      <div class="wa-icon">
-        <svg class="wa-svg" viewBox="0 0 32 32" aria-hidden="true">
-          <path d="M19.11 17.21c-.29-.14-1.7-.84-1.96-.94-.26-.1-.45-.14-.64.14-.19.29-.74.94-.9 1.13-.17.19-.33.22-.62.07-.29-.14-1.2-.44-2.28-1.4-.84-.75-1.4-1.67-1.57-1.95-.17-.29-.02-.44.13-.58.13-.13.29-.33.43-.5.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.5-.07-.14-.64-1.54-.88-2.1-.23-.56-.46-.48-.64-.49h-.55c-.19 0-.5.07-.76.36-.26.29-.99.97-.99 2.37s1.02 2.75 1.16 2.94c.14.19 2 3.06 4.84 4.29.68.29 1.21.46 1.63.59.68.22 1.3.19 1.79.12.55-.08 1.7-.69 1.94-1.35.24-.66.24-1.23.17-1.35-.07-.12-.26-.19-.55-.33zM16.03 3.2c-7 0-12.68 5.68-12.68 12.68 0 2.22.58 4.39 1.68 6.31L3.2 28.8l6.78-1.78c1.86 1.01 3.95 1.55 6.05 1.55h.01c7 0 12.68-5.68 12.68-12.68 0-3.39-1.32-6.58-3.72-8.98-2.39-2.4-5.58-3.72-8.97-3.71zm0 23.2h-.01c-1.88 0-3.72-.5-5.33-1.45l-.38-.22-4.02 1.05 1.07-3.92-.25-.4a10.49 10.49 0 0 1-1.61-5.58c0-5.8 4.72-10.52 10.53-10.52 2.81 0 5.45 1.09 7.43 3.08a10.45 10.45 0 0 1 3.08 7.44c0 5.8-4.72 10.52-10.51 10.52z"/>
-        </svg>
-      </div>
-      <div class="wa-text">
-        <strong>CPN Chaile Pablo</strong>
-        <span>Solicitar información</span>
-      </div>
-    </a>
+  <div class="floating-contact">
+    <button class="contact-toggle" id="contactToggle" type="button">
+      Contacto
+    </button>
 
-    <a
-      class="wa-bubble"
-      href="https://wa.me/5493815094493?text=Hola%2C%20solicito%20informaci%C3%B3n%20sobre%20los%20servicios%20de%20CPN%C2%B2%20Soluciones%20Tecnol%C3%B3gicas."
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Escribir por WhatsApp a CPN Dominguez Jessica"
-    >
-      <div class="wa-icon">
-        <svg class="wa-svg" viewBox="0 0 32 32" aria-hidden="true">
-          <path d="M19.11 17.21c-.29-.14-1.7-.84-1.96-.94-.26-.1-.45-.14-.64.14-.19.29-.74.94-.9 1.13-.17.19-.33.22-.62.07-.29-.14-1.2-.44-2.28-1.4-.84-.75-1.4-1.67-1.57-1.95-.17-.29-.02-.44.13-.58.13-.13.29-.33.43-.5.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.5-.07-.14-.64-1.54-.88-2.1-.23-.56-.46-.48-.64-.49h-.55c-.19 0-.5.07-.76.36-.26.29-.99.97-.99 2.37s1.02 2.75 1.16 2.94c.14.19 2 3.06 4.84 4.29.68.29 1.21.46 1.63.59.68.22 1.3.19 1.79.12.55-.08 1.7-.69 1.94-1.35.24-.66.24-1.23.17-1.35-.07-.12-.26-.19-.55-.33zM16.03 3.2c-7 0-12.68 5.68-12.68 12.68 0 2.22.58 4.39 1.68 6.31L3.2 28.8l6.78-1.78c1.86 1.01 3.95 1.55 6.05 1.55h.01c7 0 12.68-5.68 12.68-12.68 0-3.39-1.32-6.58-3.72-8.98-2.39-2.4-5.58-3.72-8.97-3.71zm0 23.2h-.01c-1.88 0-3.72-.5-5.33-1.45l-.38-.22-4.02 1.05 1.07-3.92-.25-.4a10.49 10.49 0 0 1-1.61-5.58c0-5.8 4.72-10.52 10.53-10.52 2.81 0 5.45 1.09 7.43 3.08a10.45 10.45 0 0 1 3.08 7.44c0 5.8-4.72 10.52-10.51 10.52z"/>
-        </svg>
-      </div>
-      <div class="wa-text">
-        <strong>CPN Dominguez Jessica</strong>
-        <span>Solicitar información</span>
-      </div>
-    </a>
+    <div class="floating-whatsapp hidden" id="contactMenu">
+      <a
+        class="wa-bubble"
+        href="https://wa.me/5493838473620?text=Hola%2C%20solicito%20informaci%C3%B3n%20sobre%20los%20servicios%20de%20CPN%C2%B2%20Soluciones%20Tecnol%C3%B3gicas."
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Escribir por WhatsApp a CPN Chaile Pablo"
+      >
+        <div class="wa-icon">📱</div>
+        <div class="wa-text">
+          <strong>CPN Chaile Pablo</strong>
+          <span>Solicitar información</span>
+        </div>
+      </a>
+
+      <a
+        class="wa-bubble"
+        href="https://wa.me/5493815094493?text=Hola%2C%20solicito%20informaci%C3%B3n%20sobre%20los%20servicios%20de%20CPN%C2%B2%20Soluciones%20Tecnol%C3%B3gicas."
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Escribir por WhatsApp a CPN Dominguez Jessica"
+      >
+        <div class="wa-icon">📱</div>
+        <div class="wa-text">
+          <strong>CPN Dominguez Jessica</strong>
+          <span>Solicitar información</span>
+        </div>
+      </a>
+    </div>
   </div>
+
+  <script>
+    const contactToggle = document.getElementById('contactToggle');
+    const contactMenu = document.getElementById('contactMenu');
+    const floatingContact = document.querySelector('.floating-contact');
+
+    contactToggle.addEventListener('click', () => {
+      contactMenu.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!floatingContact.contains(e.target)) {
+        contactMenu.classList.add('hidden');
+      }
+    });
+  </script>
 </body>
 </html>
