@@ -30,6 +30,18 @@
 
     html { scroll-behavior: smooth; }
 
+    html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 120px;
+}
+
+#vision,
+#mision,
+#servicios,
+#contacto {
+  scroll-margin-top: 120px;
+}
+    
     body {
       margin: 0;
       font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
@@ -444,11 +456,11 @@
       margin-bottom: 0;
     }
 
-    footer {
-      padding: 28px 0 42px;
-      color: var(--muted);
-      text-align: center;
-    }
+footer {
+  padding: 28px 0 140px;
+  color: var(--muted);
+  text-align: center;
+}
 
     .floating-contact {
       position: fixed;
@@ -589,10 +601,13 @@
       .floating-contact {
         right: 12px;
         left: 12px;
-        bottom: 12px;
+        bottom: 24px;
         align-items: stretch;
       }
 
+      body {
+  padding-bottom: 120px;
+            }
       .contact-toggle {
         width: 100%;
       }
@@ -848,7 +863,7 @@ footer {
         rel="noopener noreferrer"
         aria-label="Escribir por WhatsApp a CPN Chaile Pablo"
       >
-        <div class="icon">
+<div class="wa-icon-img">
   <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
 </div>
         <div class="wa-text">
