@@ -361,19 +361,20 @@
         rgba(10, 16, 32, 0.84);
     }
 
-    .icon {
-      width: 54px;
-      height: 54px;
-      border-radius: 18px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 16px;
-      font-weight: 800;
-      color: var(--text);
-      background: linear-gradient(135deg, rgba(214,43,255,.18), rgba(0,234,255,.12));
-      border: 1px solid rgba(255,255,255,0.06);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
-    }
+.icon {
+  width: 40px;
+  height: 40px;
+  background: #25d366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon img {
+  width: 20px;
+  height: 20px;
+}
 
     .value-card p {
       color: var(--muted);
@@ -612,6 +613,15 @@
         font-size: 0.79rem;
       }
     }
+footer {
+  padding-bottom: 120px;
+}
+
+@media (max-width: 760px) {
+  .floating-contact {
+    bottom: 70px;
+  }
+}    
   </style>
 </head>
 <body>
@@ -629,7 +639,6 @@
         <a href="#vision">Visión</a>
         <a href="#mision">Misión</a>
         <a href="#servicios">Servicios</a>
-        <a href="#contacto">Contacto</a>
       </nav>
     </div>
   </header>
@@ -834,12 +843,14 @@
     <div class="floating-whatsapp hidden" id="contactMenu">
       <a
         class="wa-bubble"
-        href="https://wa.me/5493838473620?text=Hola%2C%20solicito%20informaci%C3%B3n%20sobre%20los%20servicios%20de%20CPN%C2%B2%20Soluciones%20Tecnol%C3%B3gicas."
+        href="https://wa.me/5493838473620?text=Hola%2C%20solicito%20informaci%C3%B3n%20sobre%20los%20servicios%20de%20CPN%C2%B2%20Estudio%20Contable."
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Escribir por WhatsApp a CPN Chaile Pablo"
       >
-        <div class="wa-icon">📱</div>
+        <div class="icon">
+  <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+</div>
         <div class="wa-text">
           <strong>CPN Chaile Pablo</strong>
           <span>Solicitar información</span>
@@ -848,12 +859,14 @@
 
       <a
         class="wa-bubble"
-        href="https://wa.me/5493815094493?text=Hola%2C%20solicito%20informaci%C3%B3n%20sobre%20los%20servicios%20de%20CPN%C2%B2%20Soluciones%20Tecnol%C3%B3gicas."
+        href="https://wa.me/5493815094493?text=Hola%2C%20solicito%20informaci%C3%B3n%20sobre%20los%20servicios%20de%20CPN%C2%B2%20Estudio%20Contable."
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Escribir por WhatsApp a CPN Dominguez Jessica"
       >
-        <div class="wa-icon">📱</div>
+        <div class="icon">
+  <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+</div>
         <div class="wa-text">
           <strong>CPN Dominguez Jessica</strong>
           <span>Solicitar información</span>
