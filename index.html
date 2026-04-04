@@ -22,6 +22,8 @@
       --radius: 24px;
       --radius-sm: 18px;
       --max: 1240px;
+      --wa: #25D366;
+      --wa-dark: #128C7E;
     }
 
     * { box-sizing: border-box; }
@@ -438,44 +440,79 @@
     .cta p {
       color: var(--muted);
       max-width: 780px;
-      margin-bottom: 24px;
-    }
-
-    .contact-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      align-items: center;
-    }
-
-    .contact-card {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 16px 20px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .contact-card strong {
-      display: block;
-      font-size: 0.88rem;
-      color: var(--muted);
-      font-weight: 600;
-    }
-
-    .contact-card span {
-      display: block;
-      font-size: 1.02rem;
-      font-weight: 700;
-      color: var(--text);
+      margin-bottom: 0;
     }
 
     footer {
       padding: 28px 0 42px;
       color: var(--muted);
       text-align: center;
+    }
+
+    .floating-whatsapp {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 60;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 320px;
+    }
+
+    .wa-bubble {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: rgba(8, 15, 28, 0.92);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+      transition: 0.25s ease;
+      backdrop-filter: blur(12px);
+    }
+
+    .wa-bubble:hover {
+      transform: translateY(-2px);
+      border-color: rgba(37, 211, 102, 0.45);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.42);
+    }
+
+    .wa-icon {
+      width: 42px;
+      height: 42px;
+      min-width: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--wa), var(--wa-dark));
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(37, 211, 102, 0.24);
+    }
+
+    .wa-text {
+      min-width: 0;
+    }
+
+    .wa-text strong {
+      display: block;
+      font-size: 0.95rem;
+      line-height: 1.2;
+      color: var(--text);
+    }
+
+    .wa-text span {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .wa-svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
     }
 
     @media (max-width: 1080px) {
@@ -516,19 +553,28 @@
         align-items: start;
       }
 
-      .contact-row {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .contact-card,
-      .btn {
-        width: 100%;
-      }
-
       .brand-logo {
         width: 50px;
         height: 50px;
+      }
+
+      .floating-whatsapp {
+        right: 12px;
+        left: 12px;
+        bottom: 12px;
+        max-width: none;
+      }
+
+      .wa-bubble {
+        padding: 11px 12px;
+      }
+
+      .wa-text strong {
+        font-size: 0.9rem;
+      }
+
+      .wa-text span {
+        font-size: 0.79rem;
       }
     }
   </style>
@@ -564,22 +610,21 @@
           </p>
 
           <div class="hero-actions">
-            <a class="btn btn-primary" href="https://wa.me/5493838473620" target="_blank" rel="noopener noreferrer">Contactar por WhatsApp</a>
             <a class="btn btn-secondary" href="#servicios">Ver servicios</a>
           </div>
 
           <div class="hero-points">
             <div class="stat">
               <strong>Asesoramiento integral</strong>
-              <span>Impositivo, contable, societario y administrativo con enfoque práctico.</span>
+              <span>Impositivo, contable, societario, administrativo y estratégico con enfoque práctico.</span>
             </div>
             <div class="stat">
               <strong>Automatización real</strong>
               <span>Procesos más ágiles, menos errores y mejor seguimiento de la información.</span>
             </div>
             <div class="stat">
-              <strong>Visión de crecimiento</strong>
-              <span>No solo cumplimos obligaciones: ayudamos a ordenar, optimizar y proyectar.</span>
+              <strong>Impulso minero</strong>
+              <span>Acompañamos a empresas y emprendimientos para posicionarse como proveedores mineros.</span>
             </div>
           </div>
         </div>
@@ -588,19 +633,20 @@
           <div class="panel" id="vision">
             <h3>Visión</h3>
             <p>
-              Ser un estudio contable alineado con la nueva era tecnológica, acercando a cada cliente una gestión más inteligente, moderna y conectada. Buscamos que la información esté disponible a tiempo, que los procesos sean simples y que las decisiones se apoyen en herramientas actuales y datos claros.
+              Ser un estudio contable alineado con la nueva era tecnológica, acercando a cada cliente una gestión más inteligente, moderna y conectada. Buscamos que la información esté disponible a tiempo, que los procesos sean simples y que las decisiones se apoyen en herramientas actuales y datos claros. También proyectamos ser un aliado clave para quienes desean desarrollarse y posicionarse como proveedores mineros, acompañándolos en su crecimiento con una visión profesional, ordenada y estratégica.
             </p>
           </div>
 
           <div class="panel" id="mision">
             <h3>Misión</h3>
             <p>
-              Brindar el mejor asesoramiento profesional con una fuerte base tecnológica, integrando automatización, seguimiento y acompañamiento personalizado. Queremos que cada cliente tenga respuestas ágiles, procesos ordenados y soluciones que reduzcan tiempos y mejoren el control.
+              Brindar el mejor asesoramiento profesional con una fuerte base tecnológica, integrando automatización, seguimiento y acompañamiento personalizado. Queremos que cada cliente tenga respuestas ágiles, procesos ordenados y soluciones que reduzcan tiempos y mejoren el control. Dentro de esa misión, ofrecemos un acompañamiento especial para empresas y emprendedores que buscan ingresar o fortalecerse en el sector minero como proveedores nacionales y provinciales.
             </p>
             <ul class="check-list">
               <li>Atención profesional cercana, clara y orientada a resultados.</li>
               <li>Servicios contables e impositivos adaptados a cada realidad.</li>
               <li>Tecnología aplicada para simplificar tareas y optimizar recursos.</li>
+              <li>Asesoramiento para gestión, presentación y posicionamiento como proveedor minero.</li>
             </ul>
           </div>
         </div>
@@ -613,7 +659,7 @@
           <div>
             <h2>Cómo trabajamos</h2>
             <p>
-              Entendemos la profesión contable como una combinación de conocimiento técnico, orden administrativo y herramientas digitales. Por eso unimos cumplimiento, planificación, automatización y acompañamiento estratégico en una propuesta integral.
+              Entendemos la profesión contable como una combinación de conocimiento técnico, orden administrativo y herramientas digitales. Por eso unimos cumplimiento, planificación, automatización y acompañamiento estratégico en una propuesta integral, incluyendo asesoramiento para clientes que buscan insertarse con mayor solidez en el ecosistema minero.
             </p>
           </div>
         </div>
@@ -711,6 +757,18 @@
               <li>Acompañamiento profesional para crecer mejor.</li>
             </ul>
           </article>
+
+          <article class="service-card">
+            <h3>Proveedores mineros</h3>
+            <ul>
+              <li>Asesoramiento para posicionarse como proveedor minero.</li>
+              <li>Gestión y uso de plataformas vinculadas al sector.</li>
+              <li>Armado de carpeta de presentación empresarial.</li>
+              <li>Asistencia en licitaciones y presentaciones.</li>
+              <li>Permisos y registros de proveedores mineros nacionales y provinciales.</li>
+              <li>Acompañamiento documental y estratégico para competir mejor.</li>
+            </ul>
+          </article>
         </div>
       </div>
     </section>
@@ -720,21 +778,8 @@
         <div class="cta">
           <h2>Asesoramiento profesional con tecnología aplicada.</h2>
           <p>
-            Si buscás ordenar tu gestión, resolver trámites, optimizar procesos o avanzar hacia una estructura más moderna, estamos preparados para acompañarte con soluciones concretas y atención profesional.
+            Si buscás ordenar tu gestión, resolver trámites, optimizar procesos, modernizar tu estudio o fortalecer tu perfil como proveedor minero, estamos preparados para acompañarte con soluciones concretas y atención profesional.
           </p>
-
-          <div class="contact-row">
-            <a class="contact-card" href="tel:+5493838473620">
-              <div>
-                <strong>Teléfono de contacto</strong>
-                <span>+54 9 3838 47-3620</span>
-              </div>
-            </a>
-
-            <a class="btn btn-primary" href="https://wa.me/5493838473620" target="_blank" rel="noopener noreferrer">
-              Escribir por WhatsApp
-            </a>
-          </div>
         </div>
       </div>
     </section>
@@ -745,5 +790,43 @@
       CPN² Soluciones Tecnológicas · Contabilidad, automatización e innovación para una gestión más inteligente.
     </div>
   </footer>
+
+  <div class="floating-whatsapp">
+    <a
+      class="wa-bubble"
+      href="https://wa.me/5493838473620?text=Hola%2C%20solicito%20informaci%C3%B3n%20sobre%20los%20servicios%20de%20CPN%C2%B2%20Soluciones%20Tecnol%C3%B3gicas."
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Escribir por WhatsApp a CPN Chaile Pablo"
+    >
+      <div class="wa-icon">
+        <svg class="wa-svg" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M19.11 17.21c-.29-.14-1.7-.84-1.96-.94-.26-.1-.45-.14-.64.14-.19.29-.74.94-.9 1.13-.17.19-.33.22-.62.07-.29-.14-1.2-.44-2.28-1.4-.84-.75-1.4-1.67-1.57-1.95-.17-.29-.02-.44.13-.58.13-.13.29-.33.43-.5.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.5-.07-.14-.64-1.54-.88-2.1-.23-.56-.46-.48-.64-.49h-.55c-.19 0-.5.07-.76.36-.26.29-.99.97-.99 2.37s1.02 2.75 1.16 2.94c.14.19 2 3.06 4.84 4.29.68.29 1.21.46 1.63.59.68.22 1.3.19 1.79.12.55-.08 1.7-.69 1.94-1.35.24-.66.24-1.23.17-1.35-.07-.12-.26-.19-.55-.33zM16.03 3.2c-7 0-12.68 5.68-12.68 12.68 0 2.22.58 4.39 1.68 6.31L3.2 28.8l6.78-1.78c1.86 1.01 3.95 1.55 6.05 1.55h.01c7 0 12.68-5.68 12.68-12.68 0-3.39-1.32-6.58-3.72-8.98-2.39-2.4-5.58-3.72-8.97-3.71zm0 23.2h-.01c-1.88 0-3.72-.5-5.33-1.45l-.38-.22-4.02 1.05 1.07-3.92-.25-.4a10.49 10.49 0 0 1-1.61-5.58c0-5.8 4.72-10.52 10.53-10.52 2.81 0 5.45 1.09 7.43 3.08a10.45 10.45 0 0 1 3.08 7.44c0 5.8-4.72 10.52-10.51 10.52z"/>
+        </svg>
+      </div>
+      <div class="wa-text">
+        <strong>CPN Chaile Pablo</strong>
+        <span>Solicitar información</span>
+      </div>
+    </a>
+
+    <a
+      class="wa-bubble"
+      href="https://wa.me/5493815094493?text=Hola%2C%20solicito%20informaci%C3%B3n%20sobre%20los%20servicios%20de%20CPN%C2%B2%20Soluciones%20Tecnol%C3%B3gicas."
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Escribir por WhatsApp a CPN Dominguez Jessica"
+    >
+      <div class="wa-icon">
+        <svg class="wa-svg" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M19.11 17.21c-.29-.14-1.7-.84-1.96-.94-.26-.1-.45-.14-.64.14-.19.29-.74.94-.9 1.13-.17.19-.33.22-.62.07-.29-.14-1.2-.44-2.28-1.4-.84-.75-1.4-1.67-1.57-1.95-.17-.29-.02-.44.13-.58.13-.13.29-.33.43-.5.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.5-.07-.14-.64-1.54-.88-2.1-.23-.56-.46-.48-.64-.49h-.55c-.19 0-.5.07-.76.36-.26.29-.99.97-.99 2.37s1.02 2.75 1.16 2.94c.14.19 2 3.06 4.84 4.29.68.29 1.21.46 1.63.59.68.22 1.3.19 1.79.12.55-.08 1.7-.69 1.94-1.35.24-.66.24-1.23.17-1.35-.07-.12-.26-.19-.55-.33zM16.03 3.2c-7 0-12.68 5.68-12.68 12.68 0 2.22.58 4.39 1.68 6.31L3.2 28.8l6.78-1.78c1.86 1.01 3.95 1.55 6.05 1.55h.01c7 0 12.68-5.68 12.68-12.68 0-3.39-1.32-6.58-3.72-8.98-2.39-2.4-5.58-3.72-8.97-3.71zm0 23.2h-.01c-1.88 0-3.72-.5-5.33-1.45l-.38-.22-4.02 1.05 1.07-3.92-.25-.4a10.49 10.49 0 0 1-1.61-5.58c0-5.8 4.72-10.52 10.53-10.52 2.81 0 5.45 1.09 7.43 3.08a10.45 10.45 0 0 1 3.08 7.44c0 5.8-4.72 10.52-10.51 10.52z"/>
+        </svg>
+      </div>
+      <div class="wa-text">
+        <strong>CPN Dominguez Jessica</strong>
+        <span>Solicitar información</span>
+      </div>
+    </a>
+  </div>
 </body>
 </html>
