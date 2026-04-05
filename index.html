@@ -35,10 +35,7 @@
       scroll-padding-top: 120px;
     }
 
-    #vision,
-    #mision,
-    #servicios,
-    #contacto {
+    #servicios {
       scroll-margin-top: 120px;
     }
 
@@ -67,7 +64,7 @@
     .topbar {
       position: sticky;
       top: 0;
-      z-index: 30;
+      z-index: 50;
       backdrop-filter: blur(14px);
       background: rgba(3, 7, 14, 0.76);
       border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -126,19 +123,52 @@
       flex-wrap: wrap;
       gap: 8px;
       align-items: center;
+      position: relative;
     }
 
-    .nav-links a {
+    .nav-links a,
+    .contact-nav-btn {
       color: var(--muted);
       font-size: 0.95rem;
       padding: 10px 14px;
       border-radius: 999px;
       transition: 0.25s ease;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
     }
 
-    .nav-links a:hover {
+    .nav-links a:hover,
+    .contact-nav-btn:hover,
+    .contact-nav-btn.active {
       color: var(--text);
       background: rgba(255,255,255,0.05);
+    }
+
+    .contact-nav-wrap {
+      position: relative;
+    }
+
+    .contact-dropdown {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      width: min(320px, calc(100vw - 32px));
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 22px;
+      background: rgba(8, 15, 28, 0.94);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.42);
+      backdrop-filter: blur(14px);
+      z-index: 100;
+    }
+
+    .contact-dropdown.hidden {
+      display: none;
     }
 
     .btn {
@@ -158,12 +188,6 @@
       transform: translateY(-2px);
     }
 
-    .btn-primary {
-      color: #041019;
-      background: linear-gradient(135deg, var(--cyan), var(--blue) 55%, var(--violet));
-      box-shadow: 0 12px 34px rgba(0, 234, 255, 0.18);
-    }
-
     .btn-secondary {
       background: rgba(255,255,255,0.03);
       border-color: rgba(255,255,255,0.08);
@@ -176,7 +200,7 @@
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
+      grid-template-columns: 1fr;
       gap: 26px;
       align-items: stretch;
     }
@@ -185,8 +209,7 @@
     .panel,
     .service-card,
     .value-card,
-    .stat,
-    .cta {
+    .stat {
       background: var(--panel);
       border: 1px solid var(--line);
       border-radius: var(--radius);
@@ -295,52 +318,6 @@
       font-size: 0.94rem;
     }
 
-    .hero-side {
-      display: grid;
-      gap: 18px;
-    }
-
-    .panel {
-      padding: 28px;
-      background: var(--panel-strong);
-    }
-
-    .panel h3 {
-      font-size: 1.24rem;
-      margin-bottom: 12px;
-    }
-
-    .panel p {
-      color: var(--muted);
-      margin-bottom: 0;
-    }
-
-    .check-list {
-      list-style: none;
-      padding: 0;
-      margin: 18px 0 0;
-      display: grid;
-      gap: 12px;
-    }
-
-    .check-list li {
-      position: relative;
-      padding-left: 20px;
-      color: var(--muted);
-    }
-
-    .check-list li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 11px;
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--cyan), var(--violet));
-      box-shadow: 0 0 0 4px rgba(0, 234, 255, 0.10);
-    }
-
     section {
       padding: 26px 0;
     }
@@ -378,29 +355,25 @@
         rgba(10, 16, 32, 0.84);
     }
 
-.icon {
-  width: auto;
-  height: auto;
-  display: inline-block;
-  margin-bottom: 16px;
-
-  font-size: 2.4rem;
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: -1px;
-
-  color: transparent;
-  background: linear-gradient(135deg, #d62bff 0%, #7a3cff 40%, #1f8fff 72%, #00eaff 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-
-  text-shadow:
-    0 0 12px rgba(122, 60, 255, 0.25),
-    0 0 18px rgba(0, 234, 255, 0.18);
-
-  border: none;
-  box-shadow: none;
-}
+    .icon {
+      width: auto;
+      height: auto;
+      display: inline-block;
+      margin-bottom: 16px;
+      font-size: 2.4rem;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -1px;
+      color: transparent;
+      background: linear-gradient(135deg, #d62bff 0%, #7a3cff 40%, #1f8fff 72%, #00eaff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      text-shadow:
+        0 0 12px rgba(122, 60, 255, 0.25),
+        0 0 18px rgba(0, 234, 255, 0.18);
+      border: none;
+      box-shadow: none;
+    }
 
     .value-card p {
       color: var(--muted);
@@ -451,72 +424,10 @@
       box-shadow: 0 0 0 4px rgba(122, 60, 255, 0.08);
     }
 
-    .cta {
-      padding: 34px;
-      margin-top: 10px;
-      background:
-        linear-gradient(135deg, rgba(214,43,255,.08), rgba(0,234,255,.08)),
-        rgba(10, 16, 32, 0.86);
-    }
-
-    .cta h2 {
-      font-size: clamp(1.9rem, 4vw, 3rem);
-      margin-bottom: 14px;
-    }
-
-    .cta p {
-      color: var(--muted);
-      max-width: 780px;
-      margin-bottom: 0;
-    }
-
     footer {
-      padding: 28px 0 140px;
+      padding: 28px 0 60px;
       color: var(--muted);
       text-align: center;
-    }
-
-    .floating-contact {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      z-index: 60;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 12px;
-    }
-
-    .contact-toggle {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 14px 18px;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      background: linear-gradient(135deg, var(--wa), var(--wa-dark));
-      color: #fff;
-      font-weight: 700;
-      font-size: 0.95rem;
-      box-shadow: 0 16px 36px rgba(37, 211, 102, 0.28);
-      transition: 0.25s ease;
-    }
-
-    .contact-toggle:hover {
-      transform: translateY(-2px);
-    }
-
-    .floating-whatsapp {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-width: 320px;
-    }
-
-    .floating-whatsapp.hidden {
-      display: none;
     }
 
     .wa-bubble {
@@ -525,11 +436,10 @@
       gap: 12px;
       padding: 12px 14px;
       border-radius: 18px;
-      background: rgba(8, 15, 28, 0.92);
+      background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.22);
       transition: 0.25s ease;
-      backdrop-filter: blur(12px);
     }
 
     .wa-bubble:hover {
@@ -575,7 +485,6 @@
     }
 
     @media (max-width: 1080px) {
-      .hero-grid,
       .values,
       .services-grid {
         grid-template-columns: 1fr;
@@ -601,10 +510,8 @@
       }
 
       .hero-card,
-      .panel,
       .value-card,
-      .service-card,
-      .cta {
+      .service-card {
         padding: 22px;
       }
 
@@ -617,35 +524,18 @@
         height: 50px;
       }
 
-      .floating-contact {
-        right: 12px;
-        left: 12px;
-        bottom: 24px;
-        align-items: stretch;
+      .contact-nav-wrap {
+        position: static;
       }
 
-      .contact-toggle {
+      .contact-dropdown {
+        position: static;
         width: 100%;
+        margin-top: 10px;
       }
 
-      .floating-whatsapp {
-        max-width: none;
-      }
-
-      .wa-bubble {
-        padding: 11px 12px;
-      }
-
-      .wa-text strong {
-        font-size: 0.9rem;
-      }
-
-      .wa-text span {
-        font-size: 0.79rem;
-      }
-
-      body {
-        padding-bottom: 120px;
+      footer {
+        padding-bottom: 40px;
       }
     }
   </style>
@@ -662,9 +552,47 @@
       </div>
 
       <nav class="nav-links">
-        <a href="#vision">Visión</a>
-        <a href="#mision">Misión</a>
         <a href="#servicios">Servicios</a>
+
+        <div class="contact-nav-wrap" id="contactWrap">
+          <button class="contact-nav-btn" id="contactToggle" type="button">
+            Contacto
+          </button>
+
+          <div class="contact-dropdown hidden" id="contactMenu">
+            <a
+              class="wa-bubble"
+              href="https://wa.me/5493838473620?text=Hola%2C%20solicito%20informaci%C3%B3n%20sobre%20los%20servicios%20de%20CPN%C2%B2%20Estudio%20Contable."
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Escribir por WhatsApp a CPN Chaile Pablo"
+            >
+              <div class="wa-icon-img">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+              </div>
+              <div class="wa-text">
+                <strong>CPN Chaile Pablo</strong>
+                <span>Solicitar información</span>
+              </div>
+            </a>
+
+            <a
+              class="wa-bubble"
+              href="https://wa.me/5493815094493?text=Hola%2C%20solicito%20informaci%C3%B3n%20sobre%20los%20servicios%20de%20CPN%C2%B2%20Estudio%20Contable."
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Escribir por WhatsApp a CPN Dominguez Jessica"
+            >
+              <div class="wa-icon-img">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+              </div>
+              <div class="wa-text">
+                <strong>CPN Dominguez Jessica</strong>
+                <span>Solicitar información</span>
+              </div>
+            </a>
+          </div>
+        </div>
       </nav>
     </div>
   </header>
@@ -674,7 +602,7 @@
       <div class="container hero-grid">
         <div class="hero-card">
           <div class="eyebrow">Estudio moderno • soluciones contables • tecnología aplicada</div>
-          <h1>Tu estudio contable con una <span class="gradient-text">mentalidad digital</span>.</h1>
+          <h1>Un estudio contable con una <span class="gradient-text">mentalidad digital</span>.</h1>
           <p class="lead">
             Combinamos asesoramiento profesional, estrategia y automatización para que cada cliente tenga una gestión más clara, rápida y eficiente. Menos tareas repetitivas, más control, más orden y mejores decisiones.
           </p>
@@ -686,38 +614,16 @@
           <div class="hero-points">
             <div class="stat">
               <strong>Asesoramiento integral</strong>
-              <span>Impositivo, contable, societario, administrativo y estratégico con enfoque práctico.</span>
+              <span>Asesoramiento impositivo, contable, societario, administrativo, financiero y bancario, con enfoque práctico.</span>
             </div>
             <div class="stat">
               <strong>Automatización real</strong>
-              <span>Procesos más ágiles, menos errores y mejor seguimiento de la información.</span>
+              <span>Procesos más ágiles y control de la información mediante reportes dinámicos.</span>
             </div>
             <div class="stat">
               <strong>Impulso minero</strong>
               <span>Acompañamos a empresas y emprendimientos para posicionarse como proveedores mineros.</span>
             </div>
-          </div>
-        </div>
-
-        <div class="hero-side">
-          <div class="panel" id="vision">
-            <h3>Visión</h3>
-            <p>
-              Ser un estudio contable alineado con la nueva era tecnológica, acercando a cada cliente una gestión más inteligente, moderna y conectada. Buscamos que la información esté disponible a tiempo, que los procesos sean simples y que las decisiones se apoyen en herramientas actuales y datos claros. También proyectamos ser un aliado clave para quienes desean desarrollarse y posicionarse como proveedores mineros, acompañándolos en su crecimiento con una visión profesional, ordenada y estratégica.
-            </p>
-          </div>
-
-          <div class="panel" id="mision">
-            <h3>Misión</h3>
-            <p>
-              Brindar el mejor asesoramiento profesional con una fuerte base tecnológica, integrando automatización, seguimiento y acompañamiento personalizado. Queremos que cada cliente tenga respuestas ágiles, procesos ordenados y soluciones que reduzcan tiempos y mejoren el control. Dentro de esa misión, ofrecemos un acompañamiento especial para empresas y emprendedores que buscan ingresar o fortalecerse en el sector minero como proveedores nacionales y provinciales.
-            </p>
-            <ul class="check-list">
-              <li>Atención profesional cercana, clara y orientada a resultados.</li>
-              <li>Servicios contables e impositivos adaptados a cada realidad.</li>
-              <li>Tecnología aplicada para simplificar tareas y optimizar recursos.</li>
-              <li>Asesoramiento para gestión, presentación y posicionamiento como proveedor minero.</li>
-            </ul>
           </div>
         </div>
       </div>
@@ -734,184 +640,124 @@
           </div>
         </div>
 
-<div class="values">
-  <article class="value-card">
-    <div class="icon">C</div>
-    <h3>Claridad</h3>
-    <p>Traducimos lo técnico en soluciones concretas, simples de entender y fáciles de aplicar.</p>
-  </article>
-
-  <article class="value-card">
-    <div class="icon">P</div>
-    <h3>Precisión</h3>
-    <p>Buscamos procesos ordenados, información confiable y control real sobre cada gestión.</p>
-  </article>
-
-  <article class="value-card">
-    <div class="icon">N²</div>
-    <h3>Innovación profesional</h3>
-    <p>Incorporamos automatización y herramientas digitales sin perder criterio ni cercanía.</p>
-  </article>
-</div>
-      </div>
-    </section>
-
-    <section id="servicios">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>Servicios</h2>
-            <p>
-              Reunimos gestión contable, impositiva, societaria, administrativa y tecnológica para acompañar a personas, comercios, emprendimientos y empresas desde una visión más moderna y eficiente.
-            </p>
-          </div>
-        </div>
-
-        <div class="services-grid">
-          <article class="service-card">
-            <h3>Inscripciones y actualizaciones</h3>
-            <ul>
-              <li>Altas y bajas en ARCA, provincia y municipio.</li>
-              <li>Actualización de datos registrales.</li>
-              <li>Puntos de venta y modificaciones fiscales.</li>
-              <li>Regularización administrativa.</li>
-            </ul>
+        <div class="values">
+          <article class="value-card">
+            <div class="icon">C</div>
+            <h3>Claridad</h3>
+            <p>Traducimos lo técnico en soluciones concretas, simples de entender y fáciles de aplicar.</p>
           </article>
 
-          <article class="service-card">
-            <h3>Gestión fiscal y municipal</h3>
-            <ul>
-              <li>Habilitaciones municipales.</li>
-              <li>Controladores fiscales y trámites especiales.</li>
-              <li>Empadronamientos y recategorizaciones.</li>
-              <li>Gestiones ante organismos públicos.</li>
-            </ul>
+          <article class="value-card">
+            <div class="icon">P</div>
+            <h3>Precisión</h3>
+            <p>Buscamos procesos ordenados, información confiable y control real sobre cada gestión.</p>
           </article>
 
-          <article class="service-card">
-            <h3>Regularización y defensa</h3>
-            <ul>
-              <li>Planes de pago y moratorias.</li>
-              <li>Recursos administrativos.</li>
-              <li>Certificados de no Retención/Percepción.</li>
-              <li>Ordenamiento documental y seguimiento.</li>
-            </ul>
-          </article>
-
-          <article class="service-card">
-            <h3>Impuestos y presentaciones</h3>
-            <ul>
-              <li>IVA, IIBB y Convenio Multilateral.</li>
-              <li>Bienes Personales.</li>
-              <li>Acciones y participaciones societarias.</li>
-              <li>Regímenes informativos mensuales y anuales.</li>
-            </ul>
-          </article>
-
-          <article class="service-card">
-            <h3>Automatización y control</h3>
-            <ul>
-              <li>Optimización de procesos administrativos.</li>
-              <li>Automatizaciones para estudios y empresas.</li>
-              <li>Seguimiento de información y reportes.</li>
-              <li>Integración con herramientas digitales.</li>
-            </ul>
-          </article>
-
-          <article class="service-card">
-            <h3>Soporte estratégico</h3>
-            <ul>
-              <li>Asesoramiento financiero.</li>
-              <li>Constitución y armado de sociedades.</li>
-              <li>Diseño web y soluciones digitales.</li>
-              <li>Acompañamiento profesional para crecer mejor.</li>
-            </ul>
-          </article>
-
-          <article class="service-card">
-            <h3>Proveedores mineros</h3>
-            <ul>
-              <li>Asesoramiento para posicionarse como proveedor minero.</li>
-              <li>Gestión y uso de plataformas vinculadas al sector.</li>
-              <li>Armado de carpeta de presentación empresarial.</li>
-              <li>Asistencia en licitaciones y presentaciones.</li>
-              <li>Permisos y registros de proveedores mineros nacionales y provinciales.</li>
-            </ul>
+          <article class="value-card">
+            <div class="icon">N²</div>
+            <h3>Innovación profesional</h3>
+            <p>Incorporamos automatización y herramientas digitales sin perder criterio ni cercanía.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="contacto">
-      <div class="container">
-        <div class="cta">
-          <h2>Asesoramiento profesional con tecnología aplicada.</h2>
-          <p>
-            Si buscás ordenar tu gestión, resolver trámites, optimizar procesos, modernizar tu estudio o fortalecer tu perfil como proveedor minero, estamos preparados para acompañarte con soluciones concretas y atención profesional.
-          </p>
-        </div>
+<section id="servicios">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <h2>Servicios</h2>
+        <p>
+          Reunimos gestión contable, impositiva, societaria, administrativa, financiera y tecnológica para acompañar a personas, comercios, emprendimientos y empresas desde una visión más moderna, práctica y eficiente.
+        </p>
       </div>
-    </section>
-  </main>
+    </div>
+
+    <div class="services-grid">
+      <article class="service-card">
+        <h3>Inscripciones y gestión fiscal</h3>
+        <ul>
+          <li>Altas, bajas y modificaciones en ARCA, provincia y municipio.</li>
+          <li>Actualización de datos registrales y regularización administrativa.</li>
+          <li>Habilitaciones municipales, empadronamientos y recategorizaciones.</li>
+          <li>Puntos de venta, controladores fiscales y gestión de POSNET.</li>
+        </ul>
+      </article>
+
+      <article class="service-card">
+        <h3>Impuestos y cumplimiento</h3>
+        <ul>
+          <li>Liquidación y presentación de IVA, IIBB y Convenio Multilateral.</li>
+          <li>Bienes Personales, acciones y participaciones societarias.</li>
+          <li>Regímenes informativos mensuales y anuales.</li>
+          <li>Ordenamiento documental, seguimiento y control de obligaciones.</li>
+        </ul>
+      </article>
+
+      <article class="service-card">
+        <h3>Regularización y societario</h3>
+        <ul>
+          <li>Planes de pago, moratorias y asistencia ante requerimientos.</li>
+          <li>Recursos administrativos y certificados de no retención/percepción.</li>
+          <li>Constitución, armado y acompañamiento de sociedades.</li>
+          <li>Asesoramiento administrativo y estratégico para cada etapa del negocio.</li>
+        </ul>
+      </article>
+
+      <article class="service-card">
+        <h3>Gestión financiera y bancaria</h3>
+        <ul>
+          <li>Armado de carpetas bancarias y documentación respaldatoria.</li>
+          <li>Asesoramiento para préstamos, acuerdos y gestiones bancarias.</li>
+          <li>Manifestaciones de bienes, ingresos y solvencia económica.</li>
+          <li>Completar y preparar formularios bancarios y financieros.</li>
+        </ul>
+      </article>
+
+      <article class="service-card">
+        <h3>Automatización y soluciones digitales</h3>
+        <ul>
+          <li>Optimización de procesos administrativos y operativos.</li>
+          <li>Automatizaciones para estudios, comercios y empresas.</li>
+          <li>Seguimiento de información mediante reportes e integración digital.</li>
+          <li>Diseño web y herramientas tecnológicas para mejorar la gestión.</li>
+        </ul>
+      </article>
+
+      <article class="service-card">
+        <h3>Proveedores mineros</h3>
+        <ul>
+          <li>Asesoramiento para posicionarse como proveedor del sector minero.</li>
+          <li>Gestión de plataformas, registros y permisos nacionales y provinciales.</li>
+          <li>Armado de carpeta de presentación empresarial y documentación técnica.</li>
+          <li>Asistencia en licitaciones, presentaciones y seguimiento administrativo.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+</main>
 
   <footer>
     <div class="container">
-      CPN² Soluciones Tecnológicas · Contabilidad, automatización e innovación para una gestión más inteligente.
+      CPN² Estudio Contable con Soluciones Tecnológicas · Contabilidad, automatización e innovación para una gestión más inteligente.
     </div>
   </footer>
-
-  <div class="floating-contact">
-    <button class="contact-toggle" id="contactToggle" type="button">
-      Contacto
-    </button>
-
-    <div class="floating-whatsapp hidden" id="contactMenu">
-      <a
-        class="wa-bubble"
-        href="https://wa.me/5493838473620?text=Hola%2C%20solicito%20informaci%C3%B3n%20sobre%20los%20servicios%20de%20CPN%C2%B2%20Estudio%20Contable."
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Escribir por WhatsApp a CPN Chaile Pablo"
-      >
-        <div class="wa-icon-img">
-          <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
-        </div>
-        <div class="wa-text">
-          <strong>CPN Chaile Pablo</strong>
-          <span>Solicitar información</span>
-        </div>
-      </a>
-
-      <a
-        class="wa-bubble"
-        href="https://wa.me/5493815094493?text=Hola%2C%20solicito%20informaci%C3%B3n%20sobre%20los%20servicios%20de%20CPN%C2%B2%20Estudio%20Contable."
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Escribir por WhatsApp a CPN Dominguez Jessica"
-      >
-        <div class="wa-icon-img">
-          <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
-        </div>
-        <div class="wa-text">
-          <strong>CPN Dominguez Jessica</strong>
-          <span>Solicitar información</span>
-        </div>
-      </a>
-    </div>
-  </div>
 
   <script>
     const contactToggle = document.getElementById('contactToggle');
     const contactMenu = document.getElementById('contactMenu');
-    const floatingContact = document.querySelector('.floating-contact');
+    const contactWrap = document.getElementById('contactWrap');
 
     contactToggle.addEventListener('click', () => {
       contactMenu.classList.toggle('hidden');
+      contactToggle.classList.toggle('active');
     });
 
     document.addEventListener('click', (e) => {
-      if (!floatingContact.contains(e.target)) {
+      if (!contactWrap.contains(e.target)) {
         contactMenu.classList.add('hidden');
+        contactToggle.classList.remove('active');
       }
     });
   </script>
