@@ -49,6 +49,7 @@
         radial-gradient(circle at 50% 100%, rgba(31, 143, 255, 0.12), transparent 28%),
         linear-gradient(180deg, #03050a 0%, #070b14 40%, #09101c 100%);
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
     a {
@@ -196,6 +197,17 @@
 
     .hero {
       padding: 56px 0 34px;
+      position: relative;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 10% 40%, rgba(214, 43, 255, 0.14), transparent 28%),
+        radial-gradient(circle at 85% 35%, rgba(0, 234, 255, 0.12), transparent 24%);
+      pointer-events: none;
     }
 
     .hero-grid {
@@ -203,6 +215,8 @@
       grid-template-columns: 1fr;
       gap: 26px;
       align-items: stretch;
+      position: relative;
+      z-index: 1;
     }
 
     .hero-card,
@@ -305,6 +319,13 @@
       min-height: 112px;
       padding: 18px;
       background: rgba(255,255,255,0.03);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .stat:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0, 234, 255, 0.24);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
     }
 
     .stat strong {
@@ -380,26 +401,29 @@
       margin-bottom: 0;
     }
 
-.service-top {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 14px;
-}    
-    
-.service-icon {
-  width: 52px;
-  height: 52px;
-  min-width: 52px;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  font-size: 1.3rem;
-}
-    
+    .service-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .service-icon {
+      width: 52px;
+      height: 52px;
+      min-width: 52px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 1.3rem;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.05),
+        0 8px 24px rgba(0,0,0,0.22);
+    }
+
     .services-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -411,11 +435,30 @@
       background:
         linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015)),
         rgba(10, 16, 32, 0.84);
+      opacity: 0;
+      transform: translateY(60px) scale(0.95);
+      transition:
+        opacity 0.7s ease,
+        transform 0.7s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+      will-change: transform, opacity;
+    }
+
+    .service-card.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      border-color: rgba(0,234,255,0.3);
+      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.48);
     }
 
     .service-card h3 {
       font-size: 1.14rem;
-      margin-bottom: 14px;
+      margin-bottom: 0;
     }
 
     .service-card ul {
@@ -504,6 +547,24 @@
       margin-top: 2px;
     }
 
+    /* ===== ANIMACIONES HERO ===== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px) scale(0.96);
+      animation: fadeUp 0.9s ease forwards;
+    }
+
+    .fade-up.delay-1 { animation-delay: 0.2s; }
+    .fade-up.delay-2 { animation-delay: 0.4s; }
+    .fade-up.delay-3 { animation-delay: 0.6s; }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
     @media (max-width: 1080px) {
       .values,
       .services-grid {
@@ -552,6 +613,10 @@
         position: static;
         width: 100%;
         margin-top: 10px;
+      }
+
+      h1 {
+        letter-spacing: -1px;
       }
 
       footer {
@@ -620,18 +685,22 @@
   <main>
     <section class="hero">
       <div class="container hero-grid">
-        <div class="hero-card">
-          <div class="eyebrow">Estudio moderno • soluciones contables • tecnología aplicada</div>
-          <h1>Un estudio contable con una <span class="gradient-text">mentalidad digital</span>.</h1>
-          <p class="lead">
+        <div class="hero-card fade-up">
+          <div class="eyebrow fade-up">Estudio moderno • soluciones contables • tecnología aplicada</div>
+
+          <h1 class="fade-up delay-1">
+            Un estudio contable con una <span class="gradient-text">mentalidad digital</span>.
+          </h1>
+
+          <p class="lead fade-up delay-2">
             Combinamos asesoramiento profesional, estrategia y automatización para que cada cliente tenga una gestión más clara, rápida y eficiente. Menos tareas repetitivas, más control, más orden y mejores decisiones.
           </p>
 
-          <div class="hero-actions">
+          <div class="hero-actions fade-up delay-2">
             <a class="btn btn-secondary" href="#servicios">Ver servicios</a>
           </div>
 
-          <div class="hero-points">
+          <div class="hero-points fade-up delay-3">
             <div class="stat">
               <strong>Asesoramiento integral</strong>
               <span>Asesoramiento impositivo, contable, societario, administrativo, financiero y bancario, con enfoque práctico.</span>
@@ -774,7 +843,7 @@
         </div>
       </div>
     </section>
-</main>
+  </main>
 
   <footer>
     <div class="container">
@@ -797,6 +866,20 @@
         contactMenu.classList.add('hidden');
         contactToggle.classList.remove('active');
       }
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add("visible");
+          }, index * 90);
+        }
+      });
+    }, { threshold: 0.18 });
+
+    document.querySelectorAll(".service-card").forEach((el) => {
+      observer.observe(el);
     });
   </script>
 </body>
