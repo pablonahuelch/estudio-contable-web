@@ -1,631 +1,418 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CPN² Estudio Contable con Soluciones Tecnológicas</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
-    :root {
-      --bg: #05070d;
-      --bg-2: #0a1020;
-      --panel: rgba(10, 16, 32, 0.82);
-      --panel-strong: rgba(7, 12, 24, 0.92);
-      --line: rgba(0, 234, 255, 0.14);
-      --text: #f5faff;
-      --muted: #b9c3d8;
-      --cyan: #00eaff;
-      --blue: #1f8fff;
-      --violet: #7a3cff;
-      --magenta: #d62bff;
-      --white-soft: rgba(255,255,255,0.08);
-      --shadow: 0 20px 60px rgba(0, 0, 0, 0.42);
-      --radius: 24px;
-      --radius-sm: 18px;
-      --max: 1240px;
-      --wa: #25D366;
-      --wa-dark: #128C7E;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 120px;
-    }
-
-    #servicios {
-      scroll-margin-top: 120px;
-    }
-
-    body {
-      margin: 0;
-      font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at 15% 15%, rgba(214, 43, 255, 0.14), transparent 22%),
-        radial-gradient(circle at 80% 10%, rgba(0, 234, 255, 0.16), transparent 20%),
-        radial-gradient(circle at 50% 100%, rgba(31, 143, 255, 0.12), transparent 28%),
-        linear-gradient(180deg, #03050a 0%, #070b14 40%, #09101c 100%);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      width: min(var(--max), calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(14px);
-      background: rgba(3, 7, 14, 0.76);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      padding: 14px 0;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      min-width: 0;
-    }
-
-    .brand-logo {
-      width: 56px;
-      height: 56px;
-      object-fit: cover;
-      border-radius: 16px;
-      background: #000;
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.02),
-        0 0 24px rgba(0, 234, 255, 0.12);
-      flex-shrink: 0;
-    }
-
-    .brand-text {
-      min-width: 0;
-    }
-
-    .brand-text strong {
-      display: block;
-      font-size: 1rem;
-      letter-spacing: 0.2px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .brand-text small {
-      display: block;
-      color: var(--muted);
-      font-size: 0.82rem;
-      margin-top: 2px;
-    }
-
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-      position: relative;
-    }
-
-    .nav-links a,
-    .contact-nav-btn {
-      color: var(--muted);
-      font-size: 0.95rem;
-      padding: 10px 14px;
-      border-radius: 999px;
-      transition: 0.25s ease;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
-    }
-
-    .nav-links a:hover,
-    .contact-nav-btn:hover,
-    .contact-nav-btn.active {
-      color: var(--text);
-      background: rgba(255,255,255,0.05);
-    }
-
-    .contact-nav-wrap {
-      position: relative;
-    }
-
-    .contact-dropdown {
-      position: absolute;
-      top: calc(100% + 10px);
-      right: 0;
-      width: min(320px, calc(100vw - 32px));
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      padding: 12px;
-      border-radius: 22px;
-      background: rgba(8, 15, 28, 0.94);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 18px 45px rgba(0,0,0,0.42);
-      backdrop-filter: blur(14px);
-      z-index: 100;
-    }
-
-    .contact-dropdown.hidden {
-      display: none;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 14px 22px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      font-weight: 700;
-      transition: .22s ease;
-      cursor: pointer;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,0.03);
-      border-color: rgba(255,255,255,0.08);
-      color: var(--text);
-    }
-
-    .hero {
-      padding: 56px 0 34px;
-      position: relative;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 10% 40%, rgba(214, 43, 255, 0.14), transparent 28%),
-        radial-gradient(circle at 85% 35%, rgba(0, 234, 255, 0.12), transparent 24%);
-      pointer-events: none;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 26px;
-      align-items: stretch;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-card,
-    .panel,
-    .service-card,
-    .value-card,
-    .stat {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-card {
-      position: relative;
-      overflow: hidden;
-      padding: 38px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015)),
-        rgba(10, 16, 32, 0.86);
-    }
-
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      right: -90px;
-      top: -90px;
-      width: 260px;
-      height: 260px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(122, 60, 255, 0.22), transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-card::after {
-      content: "";
-      position: absolute;
-      left: -100px;
-      bottom: -100px;
-      width: 280px;
-      height: 280px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0, 234, 255, 0.14), transparent 70%);
-      pointer-events: none;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.06);
-      color: var(--cyan);
-      font-size: 0.9rem;
-      margin-bottom: 18px;
-    }
-
-    h1, h2, h3, p {
-      margin-top: 0;
-    }
-
-    h1 {
-      font-size: clamp(2.3rem, 5vw, 4.7rem);
-      line-height: 1.03;
-      margin-bottom: 18px;
-      letter-spacing: -1.8px;
-      max-width: 840px;
-    }
-
-    .gradient-text {
-      background: linear-gradient(135deg, var(--magenta), var(--violet), var(--cyan));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .lead {
-      max-width: 780px;
-      color: var(--muted);
-      font-size: 1.08rem;
-      margin-bottom: 26px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-bottom: 28px;
-    }
-
-    .hero-points {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-
-    .stat {
-      min-height: 112px;
-      padding: 18px;
-      background: rgba(255,255,255,0.03);
-      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .stat:hover {
-      transform: translateY(-4px);
-      border-color: rgba(0, 234, 255, 0.24);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-    }
-
-    .stat strong {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 1.08rem;
-    }
-
-    .stat span {
-      color: var(--muted);
-      font-size: 0.94rem;
-    }
-
-    section {
-      padding: 26px 0;
-    }
-
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      align-items: end;
-      margin-bottom: 24px;
-    }
-
-    .section-head h2 {
-      font-size: clamp(1.9rem, 4vw, 2.9rem);
-      margin-bottom: 10px;
-      letter-spacing: -0.9px;
-    }
-
-    .section-head p {
-      color: var(--muted);
-      max-width: 760px;
-      margin-bottom: 0;
-    }
-
-    .values {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .value-card {
-      padding: 26px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015)),
-        rgba(10, 16, 32, 0.84);
-    }
-
-    .icon {
-      width: auto;
-      height: auto;
-      display: inline-block;
-      margin-bottom: 16px;
-      font-size: 2.4rem;
-      font-weight: 900;
-      line-height: 1;
-      letter-spacing: -1px;
-      color: transparent;
-      background: linear-gradient(135deg, #d62bff 0%, #7a3cff 40%, #1f8fff 72%, #00eaff 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      text-shadow:
-        0 0 12px rgba(122, 60, 255, 0.25),
-        0 0 18px rgba(0, 234, 255, 0.18);
-      border: none;
-      box-shadow: none;
-    }
-
-    .value-card p {
-      color: var(--muted);
-      margin-bottom: 0;
-    }
-
-    .service-top {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 14px;
-    }
-
-    .service-icon {
-      width: 52px;
-      height: 52px;
-      min-width: 52px;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      font-size: 1.3rem;
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.05),
-        0 8px 24px rgba(0,0,0,0.22);
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .service-card {
-      padding: 26px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015)),
-        rgba(10, 16, 32, 0.84);
-      opacity: 0;
-      transform: translateY(60px) scale(0.95);
-      transition:
-        opacity 0.7s ease,
-        transform 0.7s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease;
-      will-change: transform, opacity;
-    }
-
-    .service-card.visible {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-
-    .service-card:hover {
-      transform: translateY(-6px) scale(1.02);
-      border-color: rgba(0,234,255,0.3);
-      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.48);
-    }
-
-    .service-card h3 {
-      font-size: 1.14rem;
-      margin-bottom: 0;
-    }
-
-    .service-card ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      gap: 10px;
-    }
-
-    .service-card li {
-      color: var(--muted);
-      padding-left: 18px;
-      position: relative;
-    }
-
-    .service-card li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 10px;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--cyan), var(--violet));
-      box-shadow: 0 0 0 4px rgba(122, 60, 255, 0.08);
-    }
-
-    footer {
-      padding: 28px 0 60px;
-      color: var(--muted);
-      text-align: center;
-    }
-
-    .wa-bubble {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 14px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 12px 28px rgba(0,0,0,0.22);
-      transition: 0.25s ease;
-    }
-
-    .wa-bubble:hover {
-      transform: translateY(-2px);
-      border-color: rgba(37, 211, 102, 0.45);
-      box-shadow: 0 18px 45px rgba(0,0,0,0.42);
-    }
-
-    .wa-icon-img {
-      width: 42px;
-      height: 42px;
-      min-width: 42px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, var(--wa), var(--wa-dark));
-      box-shadow: 0 10px 20px rgba(37, 211, 102, 0.24);
-    }
-
-    .wa-icon-img img {
-      width: 22px;
-      height: 22px;
-      display: block;
-    }
-
-    .wa-text {
-      min-width: 0;
-    }
-
-    .wa-text strong {
-      display: block;
-      font-size: 0.95rem;
-      line-height: 1.2;
-      color: var(--text);
-    }
-
-    .wa-text span {
-      display: block;
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
-    /* ===== ANIMACIONES HERO ===== */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(40px) scale(0.96);
-      animation: fadeUp 0.9s ease forwards;
-    }
-
-    .fade-up.delay-1 { animation-delay: 0.2s; }
-    .fade-up.delay-2 { animation-delay: 0.4s; }
-    .fade-up.delay-3 { animation-delay: 0.6s; }
-
-    @keyframes fadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
+    :root{
+      --navy:#0f2547;
+      --paper:#f6f2eb;
+      --text-dark:#10213e;
+      --text-light:#f7f4ef;
+      --muted-dark:rgba(16,33,62,.66);
+      --muted-light:rgba(247,244,239,.76);
+      --orange:#ff6b2c;
+      --shadow:0 16px 40px rgba(8,18,36,.08);
+      --wa:#25D366;
+      --wa-dark:#128C7E;
+      --max:1240px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:100px}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,sans-serif;
+      color:var(--text-dark);
+      background:var(--paper);
+      overflow-x:hidden;
+    }
+    a{text-decoration:none;color:inherit}
+    img{display:block;max-width:100%}
+    .container{width:min(var(--max), calc(100% - 32px)); margin:0 auto}
+
+    .eyebrow{
+      display:inline-block;
+      margin-bottom:14px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      font-size:.78rem;
+      font-weight:800;
+      color:var(--orange);
+    }
+
+    .topbar{
+      position:sticky; top:0; z-index:60;
+      background:rgba(246,242,235,.92);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(16,33,62,.08);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between; gap:18px;
+      padding:14px 0;
+    }
+    .brand{display:flex; align-items:center; gap:14px; min-width:0}
+.brand-logo{
+  width:60px;
+  height:auto;
+  object-fit:contain;
+  background:transparent;
+  border:none;
+  opacity:0.95;
+}
+    .brand-text strong{
+      display:block; font-size:1rem; color:var(--text-dark);
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .brand-text small{
+      display:block; margin-top:2px; font-size:.84rem; color:var(--muted-dark);
+    }
+    .nav-links{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+    .nav-links a,.contact-nav-btn{
+      padding:11px 14px; border:none; background:transparent; border-radius:999px;
+      color:var(--muted-dark); cursor:pointer; font:600 .95rem Inter,sans-serif;
+      transition:.25s ease;
+    }
+    .nav-links a:hover,.contact-nav-btn:hover,.contact-nav-btn.active{
+      background:rgba(16,33,62,.06); color:var(--text-dark);
+    }
+
+    .contact-nav-wrap{position:relative}
+    .contact-dropdown{
+      position:absolute; right:0; top:calc(100% + 10px);
+      width:min(330px, calc(100vw - 32px));
+      background:#fff; border:1px solid rgba(16,33,62,.08); border-radius:24px;
+      padding:12px; box-shadow:var(--shadow);
+      display:flex; flex-direction:column; gap:12px;
+    }
+    .contact-dropdown.hidden{display:none}
+    .wa-bubble{
+      display:flex; align-items:center; gap:12px; padding:12px 14px;
+      border-radius:18px; border:1px solid rgba(16,33,62,.08);
+      background:#fff; transition:.25s ease;
+    }
+    .wa-bubble:hover{transform:translateY(-2px); box-shadow:0 12px 26px rgba(8,18,36,.10)}
+    .wa-icon-img{
+      width:42px; height:42px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      background:linear-gradient(135deg,var(--wa),var(--wa-dark));
+      color:#fff; font-size:1.05rem; font-weight:800; flex-shrink:0;
+    }
+    .wa-text strong{display:block; font-size:.96rem}
+    .wa-text span{display:block; margin-top:2px; font-size:.82rem; color:var(--muted-dark)}
+
+    .first-fold{
+      background:linear-gradient(90deg, var(--navy) 0 39%, var(--paper) 39% 100%);
+      overflow:hidden;
+    }
+    .fold-shell{
+      min-height:680px;
+      display:grid;
+      grid-template-columns:39% 61%;
+    }
+
+    .hero-side{
+      color:var(--text-light);
+      padding:88px 28px 34px 0;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-start;
+    }
+    .hero-side h1{
+      margin:0;
+      font-family:"Fraunces", Georgia, serif;
+      font-size:clamp(3.2rem, 6.2vw, 5.8rem);
+      line-height:.94;
+      letter-spacing:-.055em;
+      max-width:470px;
+    }
+    .hero-side .accent{color:var(--orange)}
+    .hero-side p{
+      margin:24px 0 0;
+      max-width:430px;
+      font-size:1rem;
+      line-height:1.78;
+      color:var(--muted-light);
+    }
+
+    .hero-mini-grid{
+      margin-top:34px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      max-width:480px;
+    }
+    .mini-stat{
+      border:1px solid rgba(247,244,239,.12);
+      background:rgba(255,255,255,.02);
+      min-height:158px;
+      padding:14px 12px;
+    }
+    .mini-stat strong{
+      display:block;
+      font-size:.94rem;
+      line-height:1.25;
+      margin-bottom:8px;
+      color:var(--text-light);
+    }
+    .mini-stat span{
+      display:block;
+      font-size:.78rem;
+      line-height:1.65;
+      color:var(--muted-light);
+    }
+
+    .why-side{
+      position:relative;
+      padding:88px 0 34px 22px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-start;
+    }
+    .why-side::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:108px;
+      bottom:20px;
+      width:2px;
+      background:rgba(16,33,62,.72);
+    }
+    .why-header{
+      padding-left:18px;
+      max-width:690px;
+    }
+    .why-header .line{
+      height:1px;
+      background:rgba(16,33,62,.12);
+      margin:18px 0 20px;
+      width:100%;
+    }
+    .why-header h2{
+      margin:0 0 16px;
+      font-family:"Fraunces", Georgia, serif;
+      font-size:clamp(2.4rem,4.9vw,4.7rem);
+      line-height:.94;
+      letter-spacing:-.05em;
+      color:var(--text-dark);
+      max-width:420px;
+    }
+    .why-header p{
+      margin:0;
+      max-width:560px;
+      color:var(--muted-dark);
+      line-height:1.8;
+      font-size:1.02rem;
+    }
+
+    .why-cards{
+      position:relative;
+      margin-top:54px;
+      padding-left:18px;
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+      max-width:690px;
+    }
+    .why-card{
+      position:relative;
+      min-height:202px;
+      background:#fff;
+      border:1px solid rgba(16,33,62,.08);
+      border-radius:20px;
+      padding:16px 14px 16px;
+      overflow:hidden;
+      box-shadow:0 8px 20px rgba(8,18,36,.03);
+    }
+    .why-card .mini{
+      position:relative;
+      z-index:1;
+      display:inline-block;
+      margin-bottom:10px;
+      color:#4c82ff;
+      font-size:.95rem;
+      font-weight:800;
+    }
+    .why-card h3{
+      position:relative;
+      z-index:1;
+      margin:0 0 10px;
+      font-size:1rem;
+      line-height:1.35;
+      color:var(--text-dark);
+    }
+    .why-card p{
+      position:relative;
+      z-index:1;
+      margin:0;
+      font-size:.9rem;
+      line-height:1.72;
+      color:var(--muted-dark);
+    }
+    .why-bg{
+      position:absolute;
+      right:6px;
+      bottom:-18px;
+      font-family:"Fraunces", Georgia, serif;
+      font-size:7.6rem;
+      line-height:.8;
+      letter-spacing:-.06em;
+      color:rgba(16,33,62,.10);
+      user-select:none;
+    }
+
+    .services{
+      background:var(--paper);
+      color:var(--text-dark);
+      padding:18px 0 68px;
+    }
+    .section-head{
+      display:grid;
+      grid-template-columns:1.05fr 1fr;
+      gap:36px;
+      align-items:start;
+      margin-bottom:28px;
+    }
+    .section-head h2{
+      margin:0;
+      font-family:"Fraunces", Georgia, serif;
+      font-size:clamp(2.2rem,4.8vw,4.2rem);
+      line-height:.96;
+      letter-spacing:-.04em;
+    }
+    .section-head p{
+      margin:0;
+      color:var(--muted-dark);
+      font-size:1.05rem;
+      line-height:1.75;
+      max-width:700px;
+    }
+
+    .services-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+    .service-card{
+      background:#fff;
+      border:1px solid rgba(16,33,62,.10);
+      border-radius:26px;
+      padding:24px;
+      box-shadow:0 10px 30px rgba(8,18,36,.05);
+      transform:translateY(24px);
+      opacity:0;
+      transition:opacity .6s ease, transform .6s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+    .service-card.visible{opacity:1; transform:translateY(0)}
+    .service-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 18px 40px rgba(8,18,36,.10);
+      border-color:rgba(16,33,62,.16);
+    }
+    .service-top{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:16px;
+    }
+    .service-icon{
+      width:56px;
+      height:56px;
+      min-width:56px;
+      border-radius:18px;
+      background:var(--paper);
+      border:1px solid rgba(16,33,62,.10);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--orange);
+    }
+    .service-top h3{
+      margin:0;
+      font-size:1.08rem;
+      line-height:1.25;
+      font-weight:800;
+      color:var(--text-dark);
+    }
+    .service-card ul{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:12px;
+    }
+    .service-card li{
+      position:relative;
+      padding-left:18px;
+      color:var(--muted-dark);
+      line-height:1.68;
+    }
+    .service-card li::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:.72em;
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:var(--orange);
+    }
+
+    footer{
+      background:var(--navy);
+      color:var(--muted-light);
+      padding:26px 0 44px;
+      text-align:center;
+    }
+
+    .fade-up{opacity:0; transform:translateY(24px); animation:fadeUp .9s ease forwards}
+    .delay-1{animation-delay:.12s}
+    .delay-2{animation-delay:.24s}
+    @keyframes fadeUp{to{opacity:1; transform:translateY(0)}}
+
+    @media (max-width:1180px){
+      .first-fold{
+        background:linear-gradient(180deg, var(--navy) 0 44%, var(--paper) 44% 100%);
+      }
+      .fold-shell{
+        grid-template-columns:1fr;
+        min-height:auto;
+      }
+      .hero-side{
+        padding-right:0;
+        padding-bottom:20px;
+      }
+      .hero-side h1,.hero-side p,.hero-mini-grid{
+        max-width:none;
+      }
+      .why-side{
+        padding:40px 0 30px 0;
+      }
+      .why-side::before{display:none}
+      .why-header,.why-cards{padding-left:0;max-width:none}
+      .section-head,.services-grid,.why-cards,.hero-mini-grid{
+        grid-template-columns:1fr;
       }
     }
 
-    @media (max-width: 1080px) {
-      .values,
-      .services-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-points {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 760px) {
-      .nav {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .nav-links {
-        justify-content: center;
-      }
-
-      .hero {
-        padding-top: 36px;
-      }
-
-      .hero-card,
-      .value-card,
-      .service-card {
-        padding: 22px;
-      }
-
-      .section-head {
-        align-items: start;
-      }
-
-      .brand-logo {
-        width: 50px;
-        height: 50px;
-      }
-
-      .contact-nav-wrap {
-        position: static;
-      }
-
-      .contact-dropdown {
-        position: static;
-        width: 100%;
-        margin-top: 10px;
-      }
-
-      h1 {
-        letter-spacing: -1px;
-      }
-
-      footer {
-        padding-bottom: 40px;
-      }
+    @media (max-width:760px){
+      .nav{flex-direction:column; align-items:stretch}
+      .nav-links{justify-content:center}
+      .contact-nav-wrap{position:static}
+      .contact-dropdown{position:static; width:100%; margin-top:10px}
+      .hero-side,.why-side{padding-top:60px}
+      .why-cards,.services-grid{grid-template-columns:1fr}
     }
   </style>
 </head>
-<body>
+<body id="top">
   <header class="topbar">
     <div class="container nav">
       <div class="brand">
@@ -640,37 +427,19 @@
         <a href="#servicios">Servicios</a>
 
         <div class="contact-nav-wrap" id="contactWrap">
-          <button class="contact-nav-btn" id="contactToggle" type="button">
-            Contacto
-          </button>
+          <button class="contact-nav-btn" id="contactToggle" type="button">Contacto</button>
 
           <div class="contact-dropdown hidden" id="contactMenu">
-            <a
-              class="wa-bubble"
-              href="https://wa.me/5493838473620?text=Hola%2C%20solicito%20informaci%C3%B3n%20sobre%20los%20servicios%20de%20CPN%C2%B2%20Estudio%20Contable."
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Escribir por WhatsApp a CPN Chaile Pablo"
-            >
-              <div class="wa-icon-img">
-                <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
-              </div>
+            <a class="wa-bubble" href="https://wa.me/5493838473620?text=Hola%2C%20solicito%20informaci%C3%B3n%20sobre%20los%20servicios%20de%20CPN%C2%B2%20Estudio%20Contable." target="_blank" rel="noopener noreferrer">
+              <div class="wa-icon-img">W</div>
               <div class="wa-text">
                 <strong>CPN Chaile Pablo</strong>
                 <span>Solicitar información</span>
               </div>
             </a>
 
-            <a
-              class="wa-bubble"
-              href="https://wa.me/5493815094493?text=Hola%2C%20solicito%20informaci%C3%B3n%20sobre%20los%20servicios%20de%20CPN%C2%B2%20Estudio%20Contable."
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Escribir por WhatsApp a CPN Dominguez Jessica"
-            >
-              <div class="wa-icon-img">
-                <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
-              </div>
+            <a class="wa-bubble" href="https://wa.me/5493815094493?text=Hola%2C%20solicito%20informaci%C3%B3n%20sobre%20los%20servicios%20de%20CPN%C2%B2%20Estudio%20Contable." target="_blank" rel="noopener noreferrer">
+              <div class="wa-icon-img">W</div>
               <div class="wa-text">
                 <strong>CPN Dominguez Jessica</strong>
                 <span>Solicitar información</span>
@@ -683,89 +452,93 @@
   </header>
 
   <main>
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-card fade-up">
-          <div class="eyebrow fade-up">Estudio moderno • soluciones contables • tecnología aplicada</div>
+    <section class="first-fold">
+      <div class="container fold-shell">
+        <div class="hero-side">
+          <span class="eyebrow fade-up">Estudio contable · Argentina</span>
 
           <h1 class="fade-up delay-1">
-            Un estudio contable con una <span class="gradient-text">mentalidad digital</span>.
+            Un estudio contable con una <span class="accent">mentalidad digital.</span>
           </h1>
 
-          <p class="lead fade-up delay-2">
+          <p class="fade-up delay-2">
             Combinamos asesoramiento profesional, estrategia y automatización para que cada cliente tenga una gestión más clara, rápida y eficiente. Menos tareas repetitivas, más control, más orden y mejores decisiones.
           </p>
 
-          <div class="hero-actions fade-up delay-2">
-            <a class="btn btn-secondary" href="#servicios">Ver servicios</a>
-          </div>
-
-          <div class="hero-points fade-up delay-3">
-            <div class="stat">
+          <div class="hero-mini-grid fade-up delay-2">
+            <div class="mini-stat">
               <strong>Asesoramiento integral</strong>
               <span>Asesoramiento impositivo, contable, societario, administrativo, financiero y bancario, con enfoque práctico.</span>
             </div>
-            <div class="stat">
+            <div class="mini-stat">
               <strong>Automatización real</strong>
               <span>Procesos más ágiles y control de la información mediante reportes dinámicos.</span>
             </div>
-            <div class="stat">
+            <div class="mini-stat">
               <strong>Impulso minero</strong>
               <span>Acompañamos a empresas y emprendimientos para posicionarse como proveedores mineros.</span>
             </div>
           </div>
         </div>
+
+        <div class="why-side">
+          <div class="why-header">
+            <div class="line"></div>
+            <span class="eyebrow">Cómo trabajamos</span>
+            <h2>Más que números.</h2>
+            <p>
+              Entendemos la profesión contable como una combinación de conocimiento técnico, orden administrativo y herramientas digitales. Por eso unimos cumplimiento, planificación, automatización y acompañamiento estratégico.
+            </p>
+          </div>
+
+          <div class="why-cards">
+            <article class="why-card">
+              <div class="why-bg">C</div>
+              <div class="mini">C</div>
+              <h3>Claridad</h3>
+              <p>Traducimos lo técnico en soluciones concretas, simples de entender y fáciles de aplicar.</p>
+            </article>
+
+            <article class="why-card">
+              <div class="why-bg">P</div>
+              <div class="mini">P</div>
+              <h3>Precisión</h3>
+              <p>Buscamos procesos ordenados, información confiable y control real sobre cada gestión.</p>
+            </article>
+
+            <article class="why-card">
+              <div class="why-bg">N²</div>
+              <div class="mini">N²</div>
+              <h3>Innovación profesional</h3>
+              <p>Incorporamos automatización y herramientas digitales sin perder criterio ni cercanía con el cliente.</p>
+            </article>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section>
+    <section id="servicios" class="services">
       <div class="container">
         <div class="section-head">
           <div>
-            <h2>Cómo trabajamos</h2>
-            <p>
-              Entendemos la profesión contable como una combinación de conocimiento técnico, orden administrativo y herramientas digitales. Por eso unimos cumplimiento, planificación, automatización y acompañamiento estratégico en una propuesta integral, incluyendo asesoramiento para clientes que buscan insertarse con mayor solidez en el ecosistema minero.
-            </p>
+            <span class="eyebrow">Servicios</span>
+            <h2>Soluciones concretas.</h2>
           </div>
-        </div>
-
-        <div class="values">
-          <article class="value-card">
-            <div class="icon">C</div>
-            <h3>Claridad</h3>
-            <p>Traducimos lo técnico en soluciones concretas, simples de entender y fáciles de aplicar.</p>
-          </article>
-
-          <article class="value-card">
-            <div class="icon">P</div>
-            <h3>Precisión</h3>
-            <p>Buscamos procesos ordenados, información confiable y control real sobre cada gestión.</p>
-          </article>
-
-          <article class="value-card">
-            <div class="icon">N²</div>
-            <h3>Innovación profesional</h3>
-            <p>Incorporamos automatización y herramientas digitales sin perder criterio ni cercanía.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="servicios">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>Servicios</h2>
-            <p>
-              Reunimos gestión contable, impositiva, societaria, administrativa, financiera y tecnológica para acompañar a personas, comercios, emprendimientos y empresas desde una visión moderna, práctica y eficiente.
-            </p>
-          </div>
+          <p>
+            Reunimos gestión contable, impositiva, societaria, administrativa, financiera y tecnológica para acompañar a personas, comercios, emprendimientos y empresas desde una visión moderna, práctica y eficiente.
+          </p>
         </div>
 
         <div class="services-grid">
           <article class="service-card">
             <div class="service-top">
-              <div class="service-icon">📄</div>
+              <div class="service-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <path d="M14 2v6h6"/>
+                  <path d="M8 13h8M8 17h8M8 9h2"/>
+                </svg>
+              </div>
               <h3>Inscripciones y gestión fiscal</h3>
             </div>
             <ul>
@@ -778,7 +551,12 @@
 
           <article class="service-card">
             <div class="service-top">
-              <div class="service-icon">📊</div>
+              <div class="service-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 3v18h18"/>
+                  <path d="M7 14l4-4 3 3 5-7"/>
+                </svg>
+              </div>
               <h3>Impuestos y cumplimiento</h3>
             </div>
             <ul>
@@ -791,7 +569,13 @@
 
           <article class="service-card">
             <div class="service-top">
-              <div class="service-icon">🏢</div>
+              <div class="service-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 21h18"/>
+                  <path d="M5 21V7l7-4 7 4v14"/>
+                  <path d="M9 11h6M9 15h6"/>
+                </svg>
+              </div>
               <h3>Regularización y societario</h3>
             </div>
             <ul>
@@ -804,7 +588,12 @@
 
           <article class="service-card">
             <div class="service-top">
-              <div class="service-icon">🏦</div>
+              <div class="service-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="5" width="18" height="14" rx="2"/>
+                  <path d="M3 10h18M7 15h4"/>
+                </svg>
+              </div>
               <h3>Gestión financiera y bancaria</h3>
             </div>
             <ul>
@@ -817,7 +606,12 @@
 
           <article class="service-card">
             <div class="service-top">
-              <div class="service-icon">⚙️</div>
+              <div class="service-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82L4.21 7.2a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0A1.65 1.65 0 0 0 10 3.25V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0A1.65 1.65 0 0 0 20.75 10H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                </svg>
+              </div>
               <h3>Automatización y soluciones digitales</h3>
             </div>
             <ul>
@@ -830,7 +624,12 @@
 
           <article class="service-card">
             <div class="service-top">
-              <div class="service-icon">⛏️</div>
+              <div class="service-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 3 8 9l7 7"/>
+                  <path d="M5 20 19 6"/>
+                </svg>
+              </div>
               <h3>Proveedores mineros</h3>
             </div>
             <ul>
@@ -871,16 +670,12 @@
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add("visible");
-          }, index * 90);
+          setTimeout(() => entry.target.classList.add('visible'), index * 80);
         }
       });
-    }, { threshold: 0.18 });
+    }, { threshold: 0.14 });
 
-    document.querySelectorAll(".service-card").forEach((el) => {
-      observer.observe(el);
-    });
+    document.querySelectorAll('.service-card').forEach((el) => observer.observe(el));
   </script>
 </body>
 </html>
