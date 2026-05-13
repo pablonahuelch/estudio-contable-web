@@ -336,11 +336,15 @@
       max-width:700px;
     }
 
-    .services-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:18px;
-    }
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.services-grid .service-card:last-child{
+  grid-column:auto;
+}
     .service-card{
       background:#fff;
       border:1px solid rgba(16,33,62,.10);
