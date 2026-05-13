@@ -108,6 +108,47 @@
     .wa-text strong{display:block; font-size:.96rem}
     .wa-text span{display:block; margin-top:2px; font-size:.82rem; color:var(--muted-dark)}
 
+    .contact-person{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.contact-person-btn{
+  width:100%;
+  cursor:pointer;
+  border:none;
+  text-align:left;
+}
+
+.topic-menu{
+  display:grid;
+  gap:7px;
+  padding:4px 6px 8px 62px;
+}
+
+.topic-menu.hidden{
+  display:none;
+}
+
+.topic-menu a{
+  display:block;
+  padding:9px 12px;
+  border-radius:12px;
+  background:rgba(16,33,62,.04);
+  color:var(--muted-dark);
+  font-size:.84rem;
+  font-weight:700;
+  line-height:1.35;
+  transition:.22s ease;
+}
+
+.topic-menu a:hover{
+  background:rgba(255,107,44,.10);
+  color:var(--text-dark);
+  transform:translateX(4px);
+}
+
     .first-fold{
       background:linear-gradient(90deg, var(--navy) 0 39%, var(--paper) 39% 100%);
       overflow:hidden;
@@ -430,23 +471,52 @@
           <button class="contact-nav-btn" id="contactToggle" type="button">Contacto</button>
 
           <div class="contact-dropdown hidden" id="contactMenu">
-            <a class="wa-bubble" href="https://wa.me/5493838473620?text=Hola%2C%20solicito%20informaci%C3%B3n%20sobre%20los%20servicios%20de%20CPN%C2%B2%20Estudio%20Contable." target="_blank" rel="noopener noreferrer">
-              <div class="wa-icon-img">W</div>
-              <div class="wa-text">
-                <strong>CPN Chaile Pablo</strong>
-                <span>Solicitar información</span>
-              </div>
-            </a>
 
-            <a class="wa-bubble" href="https://wa.me/5493815094493?text=Hola%2C%20solicito%20informaci%C3%B3n%20sobre%20los%20servicios%20de%20CPN%C2%B2%20Estudio%20Contable." target="_blank" rel="noopener noreferrer">
-              <div class="wa-icon-img">W</div>
-              <div class="wa-text">
-                <strong>CPN Dominguez Jessica</strong>
-                <span>Solicitar información</span>
-              </div>
-            </a>
-          </div>
-        </div>
+  <div class="contact-person">
+    <button class="wa-bubble contact-person-btn" type="button" data-person="chaile">
+      <div class="wa-icon-img">W</div>
+      <div class="wa-text">
+        <strong>CPN Chaile Pablo</strong>
+        <span>Elegir tema de consulta</span>
+      </div>
+    </button>
+
+    <div class="topic-menu hidden" id="topics-chaile">
+      <a href="https://wa.me/5493838473620?text=Hola%20CPN%20Chaile%2C%20quisiera%20consultar%20sobre%20inscripciones%20y%20gesti%C3%B3n%20fiscal.%20Necesito%20asesoramiento%20para%20altas%2C%20bajas%2C%20modificaciones%20registrales%2C%20habilitaciones%20o%20tr%C3%A1mites%20ante%20ARCA%2C%20provincia%20o%20municipio." target="_blank">Inscripciones y gestión fiscal</a>
+
+      <a href="https://wa.me/5493838473620?text=Hola%20CPN%20Chaile%2C%20quisiera%20consultar%20sobre%20impuestos%20y%20cumplimiento.%20Necesito%20asesoramiento%20en%20IVA%2C%20IIBB%2C%20Convenio%20Multilateral%2C%20reg%C3%ADmenes%20informativos%20u%20obligaciones%20fiscales." target="_blank">Impuestos y cumplimiento</a>
+
+      <a href="https://wa.me/5493838473620?text=Hola%20CPN%20Chaile%2C%20quisiera%20consultar%20sobre%20regularizaci%C3%B3n%20y%20temas%20societarios.%20Necesito%20asesoramiento%20sobre%20planes%20de%20pago%2C%20moratorias%2C%20requerimientos%2C%20sociedades%20o%20tr%C3%A1mites%20administrativos." target="_blank">Regularización y societario</a>
+
+      <a href="https://wa.me/5493838473620?text=Hola%20CPN%20Chaile%2C%20quisiera%20consultar%20sobre%20gesti%C3%B3n%20financiera%20y%20bancaria.%20Necesito%20asesoramiento%20para%20carpetas%20bancarias%2C%20pr%C3%A9stamos%2C%20manifestaciones%20de%20bienes%20o%20documentaci%C3%B3n%20financiera." target="_blank">Gestión financiera y bancaria</a>
+
+      <a href="https://wa.me/5493838473620?text=Hola%20CPN%20Chaile%2C%20quisiera%20consultar%20sobre%20automatizaci%C3%B3n%20y%20soluciones%20digitales.%20Necesito%20asesoramiento%20para%20optimizar%20procesos%2C%20reportes%2C%20automatizaciones%20o%20herramientas%20digitales." target="_blank">Automatización y soluciones digitales</a>
+
+      <a href="https://wa.me/5493838473620?text=Hola%20CPN%20Chaile%2C%20quisiera%20consultar%20sobre%20proveedores%20mineros.%20Necesito%20asesoramiento%20para%20registros%2C%20plataformas%2C%20carpetas%20de%20presentaci%C3%B3n%2C%20licitaciones%20o%20seguimiento%20administrativo." target="_blank">Proveedores mineros</a>
+    </div>
+  </div>
+
+  <div class="contact-person">
+    <button class="wa-bubble contact-person-btn" type="button" data-person="jessica">
+      <div class="wa-icon-img">W</div>
+      <div class="wa-text">
+        <strong>CPN Dominguez Jessica</strong>
+        <span>Elegir tema de consulta</span>
+      </div>
+    </button>
+
+    <div class="topic-menu hidden" id="topics-jessica">
+      <a href="https://wa.me/5493815094493?text=Hola%20CPN%20Dominguez%20Jessica%2C%20quisiera%20consultar%20sobre%20inscripciones%20y%20gesti%C3%B3n%20fiscal.%20Necesito%20asesoramiento%20para%20altas%2C%20bajas%2C%20modificaciones%20registrales%20o%20tr%C3%A1mites%20ante%20ARCA%2C%20provincia%20o%20municipio." target="_blank">Inscripciones y gestión fiscal</a>
+
+      <a href="https://wa.me/5493815094493?text=Hola%20CPN%20Dominguez%20Jessica%2C%20quisiera%20consultar%20sobre%20impuestos%20y%20cumplimiento.%20Necesito%20asesoramiento%20en%20IVA%2C%20IIBB%2C%20Convenio%20Multilateral%2C%20reg%C3%ADmenes%20informativos%20u%20obligaciones%20fiscales." target="_blank">Impuestos y cumplimiento</a>
+
+      <a href="https://wa.me/5493815094493?text=Hola%20CPN%20Dominguez%20Jessica%2C%20quisiera%20consultar%20sobre%20proveedores%20mineros.%20Necesito%20asesoramiento%20para%20registros%2C%20plataformas%2C%20carpetas%20de%20presentaci%C3%B3n%2C%20licitaciones%20o%20seguimiento%20administrativo." target="_blank">Proveedores mineros</a>
+
+      <a href="https://wa.me/5493815094493?text=Hola%20CPN%20Dominguez%20Jessica%2C%20quisiera%20consultar%20sobre%20sueldos.%20Necesito%20asesoramiento%20en%20liquidaci%C3%B3n%20de%20sueldos%2C%20convenios%20colectivos%2C%20Libro%20Sueldo%20Digital%2C%20emisi%C3%B3n%20de%20recibos%20o%20armado%20de%20legajos." target="_blank">Sueldos</a>
+    </div>
+  </div>
+
+</div>
       </nav>
     </div>
   </header>
@@ -623,6 +693,24 @@
           </article>
 
           <article class="service-card">
+  <div class="service-top">
+    <div class="service-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h16v16H4z"/>
+        <path d="M8 8h8M8 12h8M8 16h5"/>
+      </svg>
+    </div>
+    <h3>Sueldos</h3>
+  </div>
+  <ul>
+    <li>Liquidación de sueldos y cargas sociales.</li>
+    <li>Gestión y análisis de convenios colectivos.</li>
+    <li>Libro Sueldo Digital y cumplimiento laboral.</li>
+    <li>Emisión de recibos y armado de legajos del personal.</li>
+  </ul>
+</article>
+          
+          <article class="service-card">
             <div class="service-top">
               <div class="service-icon">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -651,21 +739,37 @@
   </footer>
 
   <script>
-    const contactToggle = document.getElementById('contactToggle');
-    const contactMenu = document.getElementById('contactMenu');
-    const contactWrap = document.getElementById('contactWrap');
+const contactToggle = document.getElementById('contactToggle');
+const contactMenu = document.getElementById('contactMenu');
+const contactWrap = document.getElementById('contactWrap');
 
-    contactToggle.addEventListener('click', () => {
-      contactMenu.classList.toggle('hidden');
-      contactToggle.classList.toggle('active');
+contactToggle.addEventListener('click', () => {
+  contactMenu.classList.toggle('hidden');
+  contactToggle.classList.toggle('active');
+});
+
+document.querySelectorAll('.contact-person-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const person = btn.dataset.person;
+    const menu = document.getElementById(`topics-${person}`);
+
+    document.querySelectorAll('.topic-menu').forEach((item) => {
+      if (item !== menu) item.classList.add('hidden');
     });
 
-    document.addEventListener('click', (e) => {
-      if (!contactWrap.contains(e.target)) {
-        contactMenu.classList.add('hidden');
-        contactToggle.classList.remove('active');
-      }
+    menu.classList.toggle('hidden');
+  });
+});
+
+document.addEventListener('click', (e) => {
+  if (!contactWrap.contains(e.target)) {
+    contactMenu.classList.add('hidden');
+    contactToggle.classList.remove('active');
+    document.querySelectorAll('.topic-menu').forEach((item) => {
+      item.classList.add('hidden');
     });
+  }
+});
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, index) => {
