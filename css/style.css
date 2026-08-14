@@ -190,7 +190,6 @@ svg{ display:block; }
 }
 .section-nav__arrow:hover{ transform:translateY(-2px); border-color:var(--i1); color:var(--i2); box-shadow:0 14px 30px -12px rgba(79,70,229,.35); }
 .section-nav__arrow:disabled{ opacity:.3; pointer-events:none; }
-.section-nav__arrow:first-child svg{ transform:rotate(180deg); }
 .section-nav__dots{ display:flex; flex-direction:column; gap:10px; padding:6px 0; }
 .section-nav__dot{
   width:9px; height:9px; border-radius:50%; background:var(--border-strong);
