@@ -1,789 +1,354 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CPN² Estudio Contable con Soluciones Tecnológicas</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    :root{
-      --navy:#0f2547;
-      --paper:#f6f2eb;
-      --text-dark:#10213e;
-      --text-light:#f7f4ef;
-      --muted-dark:rgba(16,33,62,.66);
-      --muted-light:rgba(247,244,239,.76);
-      --orange:#ff6b2c;
-      --shadow:0 16px 40px rgba(8,18,36,.08);
-      --wa:#25D366;
-      --wa-dark:#128C7E;
-      --max:1240px;
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth;scroll-padding-top:100px}
-    body{
-      margin:0;
-      font-family:Inter,system-ui,sans-serif;
-      color:var(--text-dark);
-      background:var(--paper);
-      overflow-x:hidden;
-    }
-    a{text-decoration:none;color:inherit}
-    img{display:block;max-width:100%}
-    .container{width:min(var(--max), calc(100% - 32px)); margin:0 auto}
-
-    .eyebrow{
-      display:inline-block;
-      margin-bottom:14px;
-      letter-spacing:.22em;
-      text-transform:uppercase;
-      font-size:.78rem;
-      font-weight:800;
-      color:var(--orange);
-    }
-
-    .topbar{
-      position:sticky; top:0; z-index:60;
-      background:rgba(246,242,235,.92);
-      backdrop-filter:blur(10px);
-      border-bottom:1px solid rgba(16,33,62,.08);
-    }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between; gap:18px;
-      padding:14px 0;
-    }
-    .brand{display:flex; align-items:center; gap:14px; min-width:0}
-.brand-logo{
-  width:60px;
-  height:auto;
-  object-fit:contain;
-  background:transparent;
-  border:none;
-  opacity:0.95;
-}
-    .brand-text strong{
-      display:block; font-size:1rem; color:var(--text-dark);
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-    }
-    .brand-text small{
-      display:block; margin-top:2px; font-size:.84rem; color:var(--muted-dark);
-    }
-    .nav-links{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
-    .nav-links a,.contact-nav-btn{
-      padding:11px 14px; border:none; background:transparent; border-radius:999px;
-      color:var(--muted-dark); cursor:pointer; font:600 .95rem Inter,sans-serif;
-      transition:.25s ease;
-    }
-    .nav-links a:hover,.contact-nav-btn:hover,.contact-nav-btn.active{
-      background:rgba(16,33,62,.06); color:var(--text-dark);
-    }
-
-    .contact-nav-wrap{position:relative}
-    .contact-dropdown{
-      position:absolute; right:0; top:calc(100% + 10px);
-      width:min(330px, calc(100vw - 32px));
-      background:#fff; border:1px solid rgba(16,33,62,.08); border-radius:24px;
-      padding:12px; box-shadow:var(--shadow);
-      display:flex; flex-direction:column; gap:12px;
-    }
-    .contact-dropdown.hidden{display:none}
-    .wa-bubble{
-      display:flex; align-items:center; gap:12px; padding:12px 14px;
-      border-radius:18px; border:1px solid rgba(16,33,62,.08);
-      background:#fff; transition:.25s ease;
-    }
-    .wa-bubble:hover{transform:translateY(-2px); box-shadow:0 12px 26px rgba(8,18,36,.10)}
-    .wa-icon-img{
-      width:42px; height:42px; border-radius:50%;
-      display:flex; align-items:center; justify-content:center;
-      background:linear-gradient(135deg,var(--wa),var(--wa-dark));
-      color:#fff; font-size:1.05rem; font-weight:800; flex-shrink:0;
-    }
-    .wa-text strong{display:block; font-size:.96rem}
-    .wa-text span{display:block; margin-top:2px; font-size:.82rem; color:var(--muted-dark)}
-
-    .contact-person{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
-.contact-person-btn{
-  width:100%;
-  cursor:pointer;
-  border:none;
-  text-align:left;
-}
-
-.topic-menu{
-  display:grid;
-  gap:7px;
-  padding:4px 6px 8px 62px;
-}
-
-.topic-menu.hidden{
-  display:none;
-}
-
-.topic-menu a{
-  display:block;
-  padding:9px 12px;
-  border-radius:12px;
-  background:rgba(16,33,62,.04);
-  color:var(--muted-dark);
-  font-size:.84rem;
-  font-weight:700;
-  line-height:1.35;
-  transition:.22s ease;
-}
-
-.topic-menu a:hover{
-  background:rgba(255,107,44,.10);
-  color:var(--text-dark);
-  transform:translateX(4px);
-}
-
-    .first-fold{
-      background:linear-gradient(90deg, var(--navy) 0 39%, var(--paper) 39% 100%);
-      overflow:hidden;
-    }
-    .fold-shell{
-      min-height:680px;
-      display:grid;
-      grid-template-columns:39% 61%;
-    }
-
-    .hero-side{
-      color:var(--text-light);
-      padding:88px 28px 34px 0;
-      display:flex;
-      flex-direction:column;
-      justify-content:flex-start;
-    }
-    .hero-side h1{
-      margin:0;
-      font-family:"Fraunces", Georgia, serif;
-      font-size:clamp(3.2rem, 6.2vw, 5.8rem);
-      line-height:.94;
-      letter-spacing:-.055em;
-      max-width:470px;
-    }
-    .hero-side .accent{color:var(--orange)}
-    .hero-side p{
-      margin:24px 0 0;
-      max-width:430px;
-      font-size:1rem;
-      line-height:1.78;
-      color:var(--muted-light);
-    }
-
-    .hero-mini-grid{
-      margin-top:34px;
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:10px;
-      max-width:480px;
-    }
-    .mini-stat{
-      border:1px solid rgba(247,244,239,.12);
-      background:rgba(255,255,255,.02);
-      min-height:158px;
-      padding:14px 12px;
-    }
-    .mini-stat strong{
-      display:block;
-      font-size:.94rem;
-      line-height:1.25;
-      margin-bottom:8px;
-      color:var(--text-light);
-    }
-    .mini-stat span{
-      display:block;
-      font-size:.78rem;
-      line-height:1.65;
-      color:var(--muted-light);
-    }
-
-    .why-side{
-      position:relative;
-      padding:88px 0 34px 22px;
-      display:flex;
-      flex-direction:column;
-      justify-content:flex-start;
-    }
-    .why-side::before{
-      content:"";
-      position:absolute;
-      left:0;
-      top:108px;
-      bottom:20px;
-      width:2px;
-      background:rgba(16,33,62,.72);
-    }
-    .why-header{
-      padding-left:18px;
-      max-width:690px;
-    }
-    .why-header .line{
-      height:1px;
-      background:rgba(16,33,62,.12);
-      margin:18px 0 20px;
-      width:100%;
-    }
-    .why-header h2{
-      margin:0 0 16px;
-      font-family:"Fraunces", Georgia, serif;
-      font-size:clamp(2.4rem,4.9vw,4.7rem);
-      line-height:.94;
-      letter-spacing:-.05em;
-      color:var(--text-dark);
-      max-width:420px;
-    }
-    .why-header p{
-      margin:0;
-      max-width:560px;
-      color:var(--muted-dark);
-      line-height:1.8;
-      font-size:1.02rem;
-    }
-
-    .why-cards{
-      position:relative;
-      margin-top:54px;
-      padding-left:18px;
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:12px;
-      max-width:690px;
-    }
-    .why-card{
-      position:relative;
-      min-height:202px;
-      background:#fff;
-      border:1px solid rgba(16,33,62,.08);
-      border-radius:20px;
-      padding:16px 14px 16px;
-      overflow:hidden;
-      box-shadow:0 8px 20px rgba(8,18,36,.03);
-    }
-    .why-card .mini{
-      position:relative;
-      z-index:1;
-      display:inline-block;
-      margin-bottom:10px;
-      color:#4c82ff;
-      font-size:.95rem;
-      font-weight:800;
-    }
-    .why-card h3{
-      position:relative;
-      z-index:1;
-      margin:0 0 10px;
-      font-size:1rem;
-      line-height:1.35;
-      color:var(--text-dark);
-    }
-    .why-card p{
-      position:relative;
-      z-index:1;
-      margin:0;
-      font-size:.9rem;
-      line-height:1.72;
-      color:var(--muted-dark);
-    }
-    .why-bg{
-      position:absolute;
-      right:6px;
-      bottom:-18px;
-      font-family:"Fraunces", Georgia, serif;
-      font-size:7.6rem;
-      line-height:.8;
-      letter-spacing:-.06em;
-      color:rgba(16,33,62,.10);
-      user-select:none;
-    }
-
-    .services{
-      background:var(--paper);
-      color:var(--text-dark);
-      padding:18px 0 68px;
-    }
-    .section-head{
-      display:grid;
-      grid-template-columns:1.05fr 1fr;
-      gap:36px;
-      align-items:start;
-      margin-bottom:28px;
-    }
-    .section-head h2{
-      margin:0;
-      font-family:"Fraunces", Georgia, serif;
-      font-size:clamp(2.2rem,4.8vw,4.2rem);
-      line-height:.96;
-      letter-spacing:-.04em;
-    }
-    .section-head p{
-      margin:0;
-      color:var(--muted-dark);
-      font-size:1.05rem;
-      line-height:1.75;
-      max-width:700px;
-    }
-
-.services-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
-}
-
-.services-grid .service-card:last-child{
-  grid-column:2 / 3;
-}
-    .service-card{
-      background:#fff;
-      border:1px solid rgba(16,33,62,.10);
-      border-radius:26px;
-      padding:24px;
-      box-shadow:0 10px 30px rgba(8,18,36,.05);
-      transform:translateY(24px);
-      opacity:0;
-      transition:opacity .6s ease, transform .6s ease, box-shadow .25s ease, border-color .25s ease;
-    }
-    .service-card.visible{opacity:1; transform:translateY(0)}
-    .service-card:hover{
-      transform:translateY(-4px);
-      box-shadow:0 18px 40px rgba(8,18,36,.10);
-      border-color:rgba(16,33,62,.16);
-    }
-    .service-top{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      margin-bottom:16px;
-    }
-    .service-icon{
-      width:56px;
-      height:56px;
-      min-width:56px;
-      border-radius:18px;
-      background:var(--paper);
-      border:1px solid rgba(16,33,62,.10);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:var(--orange);
-    }
-    .service-top h3{
-      margin:0;
-      font-size:1.08rem;
-      line-height:1.25;
-      font-weight:800;
-      color:var(--text-dark);
-    }
-    .service-card ul{
-      margin:0;
-      padding:0;
-      list-style:none;
-      display:grid;
-      gap:12px;
-    }
-    .service-card li{
-      position:relative;
-      padding-left:18px;
-      color:var(--muted-dark);
-      line-height:1.68;
-    }
-    .service-card li::before{
-      content:"";
-      position:absolute;
-      left:0;
-      top:.72em;
-      width:8px;
-      height:8px;
-      border-radius:50%;
-      background:var(--orange);
-    }
-
-    footer{
-      background:var(--navy);
-      color:var(--muted-light);
-      padding:26px 0 44px;
-      text-align:center;
-    }
-
-    .fade-up{opacity:0; transform:translateY(24px); animation:fadeUp .9s ease forwards}
-    .delay-1{animation-delay:.12s}
-    .delay-2{animation-delay:.24s}
-    @keyframes fadeUp{to{opacity:1; transform:translateY(0)}}
-
-    @media (max-width:1180px){
-      .first-fold{
-        background:linear-gradient(180deg, var(--navy) 0 44%, var(--paper) 44% 100%);
-      }
-      .fold-shell{
-        grid-template-columns:1fr;
-        min-height:auto;
-      }
-      .hero-side{
-        padding-right:0;
-        padding-bottom:20px;
-      }
-      .hero-side h1,.hero-side p,.hero-mini-grid{
-        max-width:none;
-      }
-      .why-side{
-        padding:40px 0 30px 0;
-      }
-      .why-side::before{display:none}
-      .why-header,.why-cards{padding-left:0;max-width:none}
-      .section-head,.services-grid,.why-cards,.hero-mini-grid{
-        grid-template-columns:1fr;
-      }
-    }
-
-    @media (max-width:760px){
-      .nav{flex-direction:column; align-items:stretch}
-      .nav-links{justify-content:center}
-      .contact-nav-wrap{position:static}
-      .contact-dropdown{position:static; width:100%; margin-top:10px}
-      .hero-side,.why-side{padding-top:60px}
-      .why-cards,.services-grid{grid-template-columns:1fr}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPN² · Estudio Contable</title>
+<meta name="description" content="CPN² Estudio Contable — gestión contable, impositiva, laboral, financiera y digital para empresas, profesionales y proveedores mineros.">
+<link rel="icon" href="assets/img/favicon.png?v=2" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
-<body id="top">
-  <header class="topbar">
-    <div class="container nav">
+<body>
+
+<div class="grain"></div>
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- ================= SECTION NAV (botones de transición) ================= -->
+<nav class="section-nav" id="sectionNav" aria-label="Navegación entre secciones">
+  <button type="button" class="section-nav__arrow" id="navPrev" aria-label="Sección anterior">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 15l-6-6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <div class="section-nav__dots" id="navDots"></div>
+  <button type="button" class="section-nav__arrow" id="navNext" aria-label="Siguiente sección">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+</nav>
+
+<!-- ================= HEADER ================= -->
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a href="#top" class="brand">
+      <img src="assets/img/logo-icon.png" alt="" class="brand__mark">
+      <img src="assets/img/logo-wordmark.png" alt="CPN²" class="brand__word">
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#servicios" class="nav__link">Servicios</a>
+      <a href="#proceso" class="nav__link">Cómo trabajamos</a>
+      <a href="#equipo" class="nav__link">Equipo</a>
+    </nav>
+    <a href="#equipo" class="btn btn--dark nav__cta">
+      <span>Escribinos</span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ================= HERO (pinned zoom, estilo Apple) ================= -->
+<section class="hero-pin" id="top" data-label="Inicio">
+  <div class="hero-pin__sticky">
+    <div class="hero-pin__bg">
+      <div class="orb orb--1"></div>
+      <div class="orb orb--2"></div>
+    </div>
+
+    <div class="hero-pin__stage" id="heroStage">
+      <p class="eyebrow" data-hero="fade">
+        <span class="eyebrow__dot"></span> Estudio contable &amp; consultoría de gestión
+      </p>
+      <h1 class="hero-pin__title" data-hero="scale">
+        Tu empresa,<br>
+        <span class="grad-text">al día y en movimiento.</span>
+      </h1>
+      <p class="hero-pin__sub" data-hero="fade">
+        Gestión contable, impositiva, laboral, financiera y digital en un solo lugar —
+        para personas, empresas y proveedores del sector minero.
+      </p>
+      <div class="hero-pin__actions" data-hero="fade">
+        <a href="#servicios" class="btn btn--primary magnetic"><span>Ver servicios</span></a>
+        <a href="#equipo" class="btn btn--outline magnetic"><span>Conocer al equipo</span></a>
+      </div>
+    </div>
+
+    <div class="hero-pin__stats" id="heroStats">
+      <div class="stat"><span class="stat__num" data-count="6">0</span><span class="stat__label">Áreas de servicio</span></div>
+      <div class="stat"><span class="stat__num" data-count="2">0</span><span class="stat__label">Contadores públicos</span></div>
+      <div class="stat"><span class="stat__num" data-count="100" data-suffix="%">0</span><span class="stat__label">Gestión digital</span></div>
+    </div>
+
+    <button type="button" class="hero-pin__cue" id="heroCueBtn">
+      <span>Ver servicios</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ================= SERVICIOS (scroll-pinned scenes) ================= -->
+<section class="services" id="servicios">
+  <div class="section-head container">
+    <p class="eyebrow"><span class="eyebrow__dot"></span> Qué hacemos</p>
+    <h2 class="section-title">Seis áreas, <span class="grad-text">una sola gestión.</span></h2>
+    <p class="section-sub">Cada servicio está pensado para sacarte tareas de encima y darte información clara para decidir.</p>
+  </div>
+
+  <!-- 01 -->
+  <div class="scene" data-scene data-label="Contable e impositivo">
+    <div class="scene__sticky">
+      <div class="container scene__grid">
+        <div class="scene__art" data-scene-art>
+          <div class="scene__frame">
+            <img src="assets/img/services/contable.jpg" alt="Panel de gestión contable, impositiva y fiscal" loading="lazy">
+          </div>
+        </div>
+        <div class="scene__copy" data-scene-copy>
+          <span class="scene__num">01</span>
+          <h3 class="scene__title">Gestión contable, impositiva y fiscal</h3>
+          <p class="scene__lead">Tu empresa al día, con una gestión clara y ordenada.</p>
+          <ul class="scene__list">
+            <li>Altas, bajas y modificaciones ante ARCA, Rentas y municipios</li>
+            <li>IVA, Ingresos Brutos y Convenio Multilateral</li>
+            <li>Regímenes informativos y presentaciones fiscales</li>
+            <li>Puntos de venta, facturación y controladores fiscales</li>
+            <li>Recategorizaciones y empadronamientos</li>
+            <li>Atención de requerimientos, planes de pago y regularizaciones</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 -->
+  <div class="scene scene--rev" data-scene data-label="Sociedades">
+    <div class="scene__sticky">
+      <div class="container scene__grid">
+        <div class="scene__copy" data-scene-copy>
+          <span class="scene__num">02</span>
+          <h3 class="scene__title">Sociedades y gestión empresarial</h3>
+          <p class="scene__lead">Una estructura sólida para hacer crecer tu negocio.</p>
+          <ul class="scene__list">
+            <li>Constitución y regularización de sociedades</li>
+            <li>Modificaciones y trámites societarios</li>
+            <li>Certificados y presentaciones administrativas</li>
+            <li>Organización y documentación empresarial</li>
+            <li>Asesoramiento contable y administrativo</li>
+            <li>Acompañamiento en procesos de crecimiento o reorganización</li>
+          </ul>
+        </div>
+        <div class="scene__art" data-scene-art>
+          <div class="scene__frame">
+            <img src="assets/img/services/sociedades.jpg" alt="Carpetas de constitución y trámites societarios" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 -->
+  <div class="scene" data-scene data-label="Sueldos y laboral">
+    <div class="scene__sticky">
+      <div class="container scene__grid">
+        <div class="scene__art" data-scene-art>
+          <div class="scene__frame">
+            <img src="assets/img/services/sueldos.jpg" alt="Panel de liquidación de sueldos y cargas sociales" loading="lazy">
+          </div>
+        </div>
+        <div class="scene__copy" data-scene-copy>
+          <span class="scene__num">03</span>
+          <h3 class="scene__title">Sueldos y gestión laboral</h3>
+          <p class="scene__lead">Tu equipo administrado de forma simple y ordenada.</p>
+          <ul class="scene__list">
+            <li>Liquidación de sueldos y cargas sociales</li>
+            <li>Altas, bajas y novedades del personal</li>
+            <li>Convenios colectivos de trabajo</li>
+            <li>Libro Sueldo Digital</li>
+            <li>Emisión de recibos</li>
+            <li>Armado y administración de legajos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 -->
+  <div class="scene scene--rev" data-scene data-label="Financiero y bancario">
+    <div class="scene__sticky">
+      <div class="container scene__grid">
+        <div class="scene__copy" data-scene-copy>
+          <span class="scene__num">04</span>
+          <h3 class="scene__title">Gestión financiera y bancaria</h3>
+          <p class="scene__lead">Tus números preparados para decidir y acceder a nuevas oportunidades.</p>
+          <ul class="scene__list">
+            <li>Armado y actualización de carpetas bancarias</li>
+            <li>Manifestaciones de bienes e ingresos</li>
+            <li>Preparación de documentación económica y financiera</li>
+            <li>Gestión y seguimiento de préstamos y líneas de crédito</li>
+            <li>Presentaciones y trámites ante entidades bancarias</li>
+            <li>Análisis de información financiera y flujos de fondos</li>
+            <li>Reportes para seguimiento y toma de decisiones</li>
+          </ul>
+        </div>
+        <div class="scene__art" data-scene-art>
+          <div class="scene__frame">
+            <img src="assets/img/services/financiera.jpg" alt="Dashboard de flujo de fondos y patrimonio neto" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 -->
+  <div class="scene" data-scene data-label="Automatización">
+    <div class="scene__sticky">
+      <div class="container scene__grid">
+        <div class="scene__art" data-scene-art>
+          <div class="scene__frame">
+            <img src="assets/img/services/automatizacion.jpg" alt="Dashboard de automatización de procesos y reportes" loading="lazy">
+          </div>
+        </div>
+        <div class="scene__copy" data-scene-copy>
+          <span class="scene__num">05</span>
+          <h3 class="scene__title">Automatización y soluciones digitales</h3>
+          <p class="scene__lead">Tecnología aplicada para simplificar la gestión de tu empresa.</p>
+          <ul class="scene__list">
+            <li>Automatización de procesos administrativos y contables</li>
+            <li>Desarrollo de herramientas y sistemas a medida</li>
+            <li>Integración de procesos y fuentes de información</li>
+            <li>Dashboards y tableros de gestión</li>
+            <li>Automatización de reportes y controles</li>
+            <li>Digitalización de circuitos administrativos</li>
+            <li>Desarrollo de plataformas y soluciones web</li>
+            <li>Optimización de procesos mediante tecnología</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 -->
+  <div class="scene scene--rev" data-scene data-label="Sector minero">
+    <div class="scene__sticky">
+      <div class="container scene__grid">
+        <div class="scene__copy" data-scene-copy>
+          <span class="scene__num">06</span>
+          <h3 class="scene__title">Empresas y proveedores mineros</h3>
+          <p class="scene__lead">Acompañamiento especializado para operar en el sector minero.</p>
+          <ul class="scene__list">
+            <li>Inscripción y actualización en registros de proveedores</li>
+            <li>Gestión de plataformas y portales mineros</li>
+            <li>Armado de carpetas empresariales</li>
+            <li>Documentación administrativa y técnica</li>
+            <li>Presentación y seguimiento de licitaciones</li>
+            <li>Cumplimiento documental</li>
+            <li>Seguimiento administrativo de contratos y operaciones</li>
+          </ul>
+        </div>
+        <div class="scene__art" data-scene-art>
+          <div class="scene__frame">
+            <img src="assets/img/services/mineros.jpg" alt="Checklist de gestión para proveedores mineros" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROCESO ================= -->
+<section class="process" id="proceso" data-label="Cómo trabajamos">
+  <div class="container">
+    <div class="section-head reveal" data-reveal>
+      <p class="eyebrow"><span class="eyebrow__dot"></span> Cómo trabajamos</p>
+      <h2 class="section-title">De la primera consulta <span class="grad-text">a la solución.</span></h2>
+    </div>
+    <div class="process__line">
+      <div class="process__step reveal" data-reveal style="--i:0"><span class="process__index">01</span><h3>Diagnóstico</h3><p>Relevamos tu situación contable, impositiva y laboral actual.</p></div>
+      <div class="process__step reveal" data-reveal style="--i:1"><span class="process__index">02</span><h3>Plan a medida</h3><p>Definimos qué áreas necesitan orden inmediato y cuáles automatizar.</p></div>
+      <div class="process__step reveal" data-reveal style="--i:2"><span class="process__index">03</span><h3>Implementación</h3><p>Ejecutamos altas, trámites, liquidaciones y herramientas digitales.</p></div>
+      <div class="process__step reveal" data-reveal style="--i:3"><span class="process__index">04</span><h3>Seguimiento</h3><p>Reportes y acompañamiento continuo para que sigas creciendo.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EQUIPO ================= -->
+<section class="team" id="equipo" data-label="Equipo">
+  <div class="container">
+    <div class="section-head reveal" data-reveal>
+      <p class="eyebrow"><span class="eyebrow__dot"></span> Quiénes somos</p>
+      <h2 class="section-title">El equipo <span class="grad-text">detrás de CPN².</span></h2>
+      <p class="section-sub">Dos contadores públicos, especialidades complementarias, un mismo estándar de trabajo.</p>
+    </div>
+    <div class="team__grid">
+      <article class="team-card reveal" data-reveal style="--i:0">
+        <div class="team-card__top">
+          <div class="team-card__avatar"><span>PC</span></div>
+          <div><h3 class="team-card__name">Pablo Chaile</h3><p class="team-card__role">Contador Público Nacional</p></div>
+        </div>
+        <p class="team-card__hint">Tocá un servicio para escribirle directo por WhatsApp:</p>
+        <ul class="team-card__tags">
+          <li><a href="https://wa.me/5493838473620?text=Hola%20Pablo%21%20Vi%20la%20p%C3%A1gina%20de%20CPN%C2%B2%20y%20quer%C3%ADa%20consultarte%20sobre%20el%20servicio%20de%20%22Gesti%C3%B3n%20contable%2C%20impositiva%20y%20fiscal%22.%20%C2%BFPodemos%20coordinar%20una%20charla%3F" target="_blank" rel="noopener">Gestión contable, impositiva y fiscal</a></li>
+          <li><a href="https://wa.me/5493838473620?text=Hola%20Pablo%21%20Vi%20la%20p%C3%A1gina%20de%20CPN%C2%B2%20y%20quer%C3%ADa%20consultarte%20sobre%20el%20servicio%20de%20%22Sociedades%20y%20gesti%C3%B3n%20empresarial%22.%20%C2%BFPodemos%20coordinar%20una%20charla%3F" target="_blank" rel="noopener">Sociedades y gestión empresarial</a></li>
+          <li><a href="https://wa.me/5493838473620?text=Hola%20Pablo%21%20Vi%20la%20p%C3%A1gina%20de%20CPN%C2%B2%20y%20quer%C3%ADa%20consultarte%20sobre%20el%20servicio%20de%20%22Gesti%C3%B3n%20financiera%20y%20bancaria%22.%20%C2%BFPodemos%20coordinar%20una%20charla%3F" target="_blank" rel="noopener">Gestión financiera y bancaria</a></li>
+          <li><a href="https://wa.me/5493838473620?text=Hola%20Pablo%21%20Vi%20la%20p%C3%A1gina%20de%20CPN%C2%B2%20y%20quer%C3%ADa%20consultarte%20sobre%20el%20servicio%20de%20%22Automatizaci%C3%B3n%20y%20soluciones%20digitales%22.%20%C2%BFPodemos%20coordinar%20una%20charla%3F" target="_blank" rel="noopener">Automatización y soluciones digitales</a></li>
+          <li><a href="https://wa.me/5493838473620?text=Hola%20Pablo%21%20Vi%20la%20p%C3%A1gina%20de%20CPN%C2%B2%20y%20quer%C3%ADa%20consultarte%20sobre%20el%20servicio%20de%20%22Empresas%20y%20proveedores%20mineros%22.%20%C2%BFPodemos%20coordinar%20una%20charla%3F" target="_blank" rel="noopener">Empresas y proveedores mineros</a></li>
+        </ul>
+        <a href="https://wa.me/5493838473620" target="_blank" rel="noopener" class="team-card__cta magnetic">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.94 9.94 0 004.84 1.24h.01c5.5 0 9.96-4.46 9.96-9.96C22 6.46 17.54 2 12.04 2zm5.83 14.24c-.25.7-1.45 1.34-2 1.42-.51.08-1.15.11-1.86-.12-.43-.13-.98-.32-1.69-.63-2.97-1.28-4.9-4.26-5.05-4.46-.15-.2-1.2-1.6-1.2-3.05 0-1.45.76-2.16 1.03-2.46.27-.3.59-.37.79-.37.2 0 .4 0 .57.01.18.01.43-.07.67.51.25.6.85 2.08.92 2.23.07.15.12.33.02.53-.1.2-.15.32-.3.49-.15.17-.31.38-.44.51-.15.15-.3.31-.13.6.17.3.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.36 1.46.3.15.48.13.65-.08.18-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.75.82 2.05.97.3.15.5.22.57.35.08.13.08.72-.17 1.42z"/></svg>
+          <span>Consulta general · +54 9 3838 473620</span>
+        </a>
+      </article>
+      <article class="team-card reveal" data-reveal style="--i:1">
+        <div class="team-card__top">
+          <div class="team-card__avatar"><span>JD</span></div>
+          <div><h3 class="team-card__name">Jessica Dominguez</h3><p class="team-card__role">Contadora Pública Nacional</p></div>
+        </div>
+        <p class="team-card__hint">Tocá un servicio para escribirle directo por WhatsApp:</p>
+        <ul class="team-card__tags">
+          <li><a href="https://wa.me/5493815094493?text=Hola%20Jessica%21%20Vi%20la%20p%C3%A1gina%20de%20CPN%C2%B2%20y%20quer%C3%ADa%20consultarte%20sobre%20el%20servicio%20de%20%22Gesti%C3%B3n%20contable%2C%20impositiva%20y%20fiscal%22.%20%C2%BFPodemos%20coordinar%20una%20charla%3F" target="_blank" rel="noopener">Gestión contable, impositiva y fiscal</a></li>
+          <li><a href="https://wa.me/5493815094493?text=Hola%20Jessica%21%20Vi%20la%20p%C3%A1gina%20de%20CPN%C2%B2%20y%20quer%C3%ADa%20consultarte%20sobre%20el%20servicio%20de%20%22Sueldos%20y%20gesti%C3%B3n%20laboral%22.%20%C2%BFPodemos%20coordinar%20una%20charla%3F" target="_blank" rel="noopener">Sueldos y gestión laboral</a></li>
+          <li><a href="https://wa.me/5493815094493?text=Hola%20Jessica%21%20Vi%20la%20p%C3%A1gina%20de%20CPN%C2%B2%20y%20quer%C3%ADa%20consultarte%20sobre%20el%20servicio%20de%20%22Empresas%20y%20proveedores%20mineros%22.%20%C2%BFPodemos%20coordinar%20una%20charla%3F" target="_blank" rel="noopener">Empresas y proveedores mineros</a></li>
+        </ul>
+        <a href="https://wa.me/5493815094493" target="_blank" rel="noopener" class="team-card__cta magnetic">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.48 1.34 5L2 22l5.2-1.36a9.94 9.94 0 004.84 1.24h.01c5.5 0 9.96-4.46 9.96-9.96C22 6.46 17.54 2 12.04 2zm5.83 14.24c-.25.7-1.45 1.34-2 1.42-.51.08-1.15.11-1.86-.12-.43-.13-.98-.32-1.69-.63-2.97-1.28-4.9-4.26-5.05-4.46-.15-.2-1.2-1.6-1.2-3.05 0-1.45.76-2.16 1.03-2.46.27-.3.59-.37.79-.37.2 0 .4 0 .57.01.18.01.43-.07.67.51.25.6.85 2.08.92 2.23.07.15.12.33.02.53-.1.2-.15.32-.3.49-.15.17-.31.38-.44.51-.15.15-.3.31-.13.6.17.3.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.36 1.46.3.15.48.13.65-.08.18-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.75.82 2.05.97.3.15.5.22.57.35.08.13.08.72-.17 1.42z"/></svg>
+          <span>Consulta general · +54 9 381 5094493</span>
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer" id="contacto">
+  <div class="container footer__inner">
+    <div class="footer__brand">
       <div class="brand">
-        <img src="Logo1.png" alt="Logo CPN² Soluciones Tecnológicas" class="brand-logo" />
-        <div class="brand-text">
-          <strong>CPN² Soluciones Tecnológicas</strong>
-          <small>Contabilidad, automatización e innovación profesional</small>
-        </div>
+        <img src="assets/img/logo-icon.png" alt="" class="brand__mark">
+        <img src="assets/img/logo-wordmark.png" alt="CPN²" class="brand__word">
       </div>
-
-      <nav class="nav-links">
-        <a href="#servicios">Servicios</a>
-
-        <div class="contact-nav-wrap" id="contactWrap">
-          <button class="contact-nav-btn" id="contactToggle" type="button">Contacto</button>
-
-          <div class="contact-dropdown hidden" id="contactMenu">
-
-  <div class="contact-person">
-    <button class="wa-bubble contact-person-btn" type="button" data-person="chaile">
-      <div class="wa-icon-img">W</div>
-      <div class="wa-text">
-        <strong>CPN Chaile Pablo</strong>
-        <span>Elegir tema de consulta</span>
-      </div>
-    </button>
-
-    <div class="topic-menu hidden" id="topics-chaile">
-      <a href="https://wa.me/5493838473620?text=Hola%20CPN%20Chaile%2C%20quisiera%20consultar%20sobre%20inscripciones%20y%20gesti%C3%B3n%20fiscal.%20Necesito%20asesoramiento%20para%20altas%2C%20bajas%2C%20modificaciones%20registrales%2C%20habilitaciones%20o%20tr%C3%A1mites%20ante%20ARCA%2C%20provincia%20o%20municipio." target="_blank">Inscripciones y gestión fiscal</a>
-
-      <a href="https://wa.me/5493838473620?text=Hola%20CPN%20Chaile%2C%20quisiera%20consultar%20sobre%20impuestos%20y%20cumplimiento.%20Necesito%20asesoramiento%20en%20IVA%2C%20IIBB%2C%20Convenio%20Multilateral%2C%20reg%C3%ADmenes%20informativos%20u%20obligaciones%20fiscales." target="_blank">Impuestos y cumplimiento</a>
-
-      <a href="https://wa.me/5493838473620?text=Hola%20CPN%20Chaile%2C%20quisiera%20consultar%20sobre%20regularizaci%C3%B3n%20y%20temas%20societarios.%20Necesito%20asesoramiento%20sobre%20planes%20de%20pago%2C%20moratorias%2C%20requerimientos%2C%20sociedades%20o%20tr%C3%A1mites%20administrativos." target="_blank">Regularización y societario</a>
-
-      <a href="https://wa.me/5493838473620?text=Hola%20CPN%20Chaile%2C%20quisiera%20consultar%20sobre%20gesti%C3%B3n%20financiera%20y%20bancaria.%20Necesito%20asesoramiento%20para%20carpetas%20bancarias%2C%20pr%C3%A9stamos%2C%20manifestaciones%20de%20bienes%20o%20documentaci%C3%B3n%20financiera." target="_blank">Gestión financiera y bancaria</a>
-
-      <a href="https://wa.me/5493838473620?text=Hola%20CPN%20Chaile%2C%20quisiera%20consultar%20sobre%20automatizaci%C3%B3n%20y%20soluciones%20digitales.%20Necesito%20asesoramiento%20para%20optimizar%20procesos%2C%20reportes%2C%20automatizaciones%20o%20herramientas%20digitales." target="_blank">Automatización y soluciones digitales</a>
-
-      <a href="https://wa.me/5493838473620?text=Hola%20CPN%20Chaile%2C%20quisiera%20consultar%20sobre%20proveedores%20mineros.%20Necesito%20asesoramiento%20para%20registros%2C%20plataformas%2C%20carpetas%20de%20presentaci%C3%B3n%2C%20licitaciones%20o%20seguimiento%20administrativo." target="_blank">Proveedores mineros</a>
+      <p>Estudio contable — gestión clara para personas, empresas y proveedores mineros.</p>
+    </div>
+    <div class="footer__col">
+      <h4>Servicios</h4>
+      <a href="#servicios">Contable e impositivo</a>
+      <a href="#servicios">Sociedades</a>
+      <a href="#servicios">Sueldos y laboral</a>
+      <a href="#servicios">Financiero y bancario</a>
+      <a href="#servicios">Automatización digital</a>
+      <a href="#servicios">Sector minero</a>
+    </div>
+    <div class="footer__col">
+      <h4>Contacto</h4>
+      <a href="https://wa.me/5493838473620" target="_blank" rel="noopener">Pablo Chaile · +54 9 3838 473620</a>
+      <a href="https://wa.me/5493815094493" target="_blank" rel="noopener">Jessica Dominguez · +54 9 381 5094493</a>
     </div>
   </div>
-
-  <div class="contact-person">
-    <button class="wa-bubble contact-person-btn" type="button" data-person="jessica">
-      <div class="wa-icon-img">W</div>
-      <div class="wa-text">
-        <strong>CPN Dominguez Jessica</strong>
-        <span>Elegir tema de consulta</span>
-      </div>
-    </button>
-
-    <div class="topic-menu hidden" id="topics-jessica">
-      <a href="https://wa.me/5493815094493?text=Hola%20CPN%20Dominguez%20Jessica%2C%20quisiera%20consultar%20sobre%20inscripciones%20y%20gesti%C3%B3n%20fiscal.%20Necesito%20asesoramiento%20para%20altas%2C%20bajas%2C%20modificaciones%20registrales%20o%20tr%C3%A1mites%20ante%20ARCA%2C%20provincia%20o%20municipio." target="_blank">Inscripciones y gestión fiscal</a>
-
-      <a href="https://wa.me/5493815094493?text=Hola%20CPN%20Dominguez%20Jessica%2C%20quisiera%20consultar%20sobre%20impuestos%20y%20cumplimiento.%20Necesito%20asesoramiento%20en%20IVA%2C%20IIBB%2C%20Convenio%20Multilateral%2C%20reg%C3%ADmenes%20informativos%20u%20obligaciones%20fiscales." target="_blank">Impuestos y cumplimiento</a>
-
-      <a href="https://wa.me/5493815094493?text=Hola%20CPN%20Dominguez%20Jessica%2C%20quisiera%20consultar%20sobre%20proveedores%20mineros.%20Necesito%20asesoramiento%20para%20registros%2C%20plataformas%2C%20carpetas%20de%20presentaci%C3%B3n%2C%20licitaciones%20o%20seguimiento%20administrativo." target="_blank">Proveedores mineros</a>
-
-      <a href="https://wa.me/5493815094493?text=Hola%20CPN%20Dominguez%20Jessica%2C%20quisiera%20consultar%20sobre%20sueldos.%20Necesito%20asesoramiento%20en%20liquidaci%C3%B3n%20de%20sueldos%2C%20convenios%20colectivos%2C%20Libro%20Sueldo%20Digital%2C%20emisi%C3%B3n%20de%20recibos%20y%20armado%20de%20legajos." target="_blank">Sueldos</a>
-    </div>
+  <div class="container footer__bottom">
+    <span>© <span id="year"></span> CPN² Estudio Contable. Todos los derechos reservados.</span>
   </div>
+</footer>
 
-</div>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <section class="first-fold">
-      <div class="container fold-shell">
-        <div class="hero-side">
-          <span class="eyebrow fade-up">Estudio contable · Argentina</span>
-
-          <h1 class="fade-up delay-1">
-            Un estudio contable con una <span class="accent">mentalidad digital.</span>
-          </h1>
-
-          <p class="fade-up delay-2">
-            Combinamos asesoramiento profesional, estrategia y automatización para que cada cliente tenga una gestión más clara, rápida y eficiente. Menos tareas repetitivas, más control, más orden y mejores decisiones.
-          </p>
-
-          <div class="hero-mini-grid fade-up delay-2">
-            <div class="mini-stat">
-              <strong>Asesoramiento integral</strong>
-              <span>Asesoramiento impositivo, contable, societario, administrativo, financiero y bancario, con enfoque práctico.</span>
-            </div>
-            <div class="mini-stat">
-              <strong>Automatización real</strong>
-              <span>Procesos más ágiles y control de la información mediante reportes dinámicos.</span>
-            </div>
-            <div class="mini-stat">
-              <strong>Impulso minero</strong>
-              <span>Acompañamos a empresas y emprendimientos para posicionarse como proveedores mineros.</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="why-side">
-          <div class="why-header">
-            <div class="line"></div>
-            <span class="eyebrow">Cómo trabajamos</span>
-            <h2>Más que números.</h2>
-            <p>
-              Entendemos la profesión contable como una combinación de conocimiento técnico, orden administrativo y herramientas digitales. Por eso unimos cumplimiento, planificación, automatización y acompañamiento estratégico.
-            </p>
-          </div>
-
-          <div class="why-cards">
-            <article class="why-card">
-              <div class="why-bg">C</div>
-              <div class="mini">C</div>
-              <h3>Claridad</h3>
-              <p>Traducimos lo técnico en soluciones concretas, simples de entender y fáciles de aplicar.</p>
-            </article>
-
-            <article class="why-card">
-              <div class="why-bg">P</div>
-              <div class="mini">P</div>
-              <h3>Precisión</h3>
-              <p>Buscamos procesos ordenados, información confiable y control real sobre cada gestión.</p>
-            </article>
-
-            <article class="why-card">
-              <div class="why-bg">N²</div>
-              <div class="mini">N²</div>
-              <h3>Innovación profesional</h3>
-              <p>Incorporamos automatización y herramientas digitales sin perder criterio ni cercanía con el cliente.</p>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="servicios" class="services">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">Servicios</span>
-            <h2>Soluciones concretas.</h2>
-          </div>
-          <p>
-            Reunimos gestión contable, impositiva, societaria, administrativa, financiera y tecnológica para acompañar a personas, comercios, emprendimientos y empresas desde una visión moderna, práctica y eficiente.
-          </p>
-        </div>
-
-        <div class="services-grid">
-          <article class="service-card">
-            <div class="service-top">
-              <div class="service-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                  <path d="M14 2v6h6"/>
-                  <path d="M8 13h8M8 17h8M8 9h2"/>
-                </svg>
-              </div>
-              <h3>Inscripciones y gestión fiscal</h3>
-            </div>
-            <ul>
-              <li>Altas, bajas y modificaciones en ARCA, provincia y municipio.</li>
-              <li>Actualización de datos registrales y regularización administrativa.</li>
-              <li>Habilitaciones municipales, empadronamientos y recategorizaciones.</li>
-              <li>Puntos de venta, controladores fiscales y gestión de POSNET.</li>
-            </ul>
-          </article>
-
-          <article class="service-card">
-            <div class="service-top">
-              <div class="service-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M3 3v18h18"/>
-                  <path d="M7 14l4-4 3 3 5-7"/>
-                </svg>
-              </div>
-              <h3>Impuestos y cumplimiento</h3>
-            </div>
-            <ul>
-              <li>Liquidación y presentación de IVA, IIBB y Convenio Multilateral.</li>
-              <li>Bienes Personales, acciones y participaciones societarias.</li>
-              <li>Regímenes informativos mensuales y anuales.</li>
-              <li>Ordenamiento documental, seguimiento y control de obligaciones.</li>
-            </ul>
-          </article>
-
-          <article class="service-card">
-            <div class="service-top">
-              <div class="service-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M3 21h18"/>
-                  <path d="M5 21V7l7-4 7 4v14"/>
-                  <path d="M9 11h6M9 15h6"/>
-                </svg>
-              </div>
-              <h3>Regularización y societario</h3>
-            </div>
-            <ul>
-              <li>Planes de pago, moratorias y asistencia ante requerimientos.</li>
-              <li>Recursos administrativos y certificados de no retención/percepción.</li>
-              <li>Constitución, armado y acompañamiento de sociedades.</li>
-              <li>Asesoramiento administrativo y estratégico para cada etapa del negocio.</li>
-            </ul>
-          </article>
-
-          <article class="service-card">
-            <div class="service-top">
-              <div class="service-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="5" width="18" height="14" rx="2"/>
-                  <path d="M3 10h18M7 15h4"/>
-                </svg>
-              </div>
-              <h3>Gestión financiera y bancaria</h3>
-            </div>
-            <ul>
-              <li>Armado de carpetas bancarias y documentación respaldatoria.</li>
-              <li>Asesoramiento para préstamos, acuerdos y gestiones bancarias.</li>
-              <li>Manifestaciones de bienes, ingresos y solvencia económica.</li>
-              <li>Preparación de formularios bancarios y financieros.</li>
-            </ul>
-          </article>
-
-          <article class="service-card">
-            <div class="service-top">
-              <div class="service-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="3"/>
-                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82L4.21 7.2a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0A1.65 1.65 0 0 0 10 3.25V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0A1.65 1.65 0 0 0 20.75 10H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-                </svg>
-              </div>
-              <h3>Automatización y soluciones digitales</h3>
-            </div>
-            <ul>
-              <li>Optimización de procesos administrativos y operativos.</li>
-              <li>Automatizaciones para estudios, comercios y empresas.</li>
-              <li>Seguimiento de información mediante reportes e integración digital.</li>
-              <li>Diseño web y herramientas tecnológicas para mejorar la gestión.</li>
-            </ul>
-          </article>
-
-          <article class="service-card">
-  <div class="service-top">
-    <div class="service-icon">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M4 4h16v16H4z"/>
-        <path d="M8 8h8M8 12h8M8 16h5"/>
-      </svg>
-    </div>
-    <h3>Sueldos</h3>
-  </div>
-  <ul>
-    <li>Liquidación de sueldos y cargas sociales.</li>
-    <li>Gestión y análisis de convenios colectivos.</li>
-    <li>Libro Sueldo Digital y cumplimiento laboral.</li>
-    <li>Emisión de recibos y armado de legajos del personal.</li>
-  </ul>
-</article>
-          
-          <article class="service-card">
-            <div class="service-top">
-              <div class="service-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M14 3 8 9l7 7"/>
-                  <path d="M5 20 19 6"/>
-                </svg>
-              </div>
-              <h3>Proveedores mineros</h3>
-            </div>
-            <ul>
-              <li>Asesoramiento para posicionarse como proveedor del sector minero.</li>
-              <li>Gestión de plataformas, registros y permisos nacionales y provinciales.</li>
-              <li>Armado de carpeta de presentación empresarial y documentación técnica.</li>
-              <li>Asistencia en licitaciones, presentaciones y seguimiento administrativo.</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">
-      CPN² Estudio Contable con Soluciones Tecnológicas · Contabilidad, automatización e innovación para una gestión más inteligente.
-    </div>
-  </footer>
-
-  <script>
-const contactToggle = document.getElementById('contactToggle');
-const contactMenu = document.getElementById('contactMenu');
-const contactWrap = document.getElementById('contactWrap');
-
-contactToggle.addEventListener('click', () => {
-  contactMenu.classList.toggle('hidden');
-  contactToggle.classList.toggle('active');
-});
-
-document.querySelectorAll('.contact-person-btn').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    const person = btn.dataset.person;
-    const menu = document.getElementById(`topics-${person}`);
-
-    document.querySelectorAll('.topic-menu').forEach((item) => {
-      if (item !== menu) item.classList.add('hidden');
-    });
-
-    menu.classList.toggle('hidden');
-  });
-});
-
-document.addEventListener('click', (e) => {
-  if (!contactWrap.contains(e.target)) {
-    contactMenu.classList.add('hidden');
-    contactToggle.classList.remove('active');
-    document.querySelectorAll('.topic-menu').forEach((item) => {
-      item.classList.add('hidden');
-    });
-  }
-});
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), index * 80);
-        }
-      });
-    }, { threshold: 0.14 });
-
-    document.querySelectorAll('.service-card').forEach((el) => observer.observe(el));
-  </script>
+<script src="js/script.js"></script>
 </body>
 </html>
