@@ -142,52 +142,59 @@ function updateHero(){
 const scenes = document.querySelectorAll('[data-scene]');
 
 function updateScenes(){
-  scenes.forEach(scene => {
+  const vh = window.innerHeight;
+
+  scenes.forEach((scene, i) => {
+    const sticky = scene.querySelector('.scene__sticky');
     const art = scene.querySelector('[data-scene-art]');
     const copy = scene.querySelector('[data-scene-copy]');
-    if (!art || !copy) return;
-
-    const rect = scene.getBoundingClientRect();
-    const total = rect.height - window.innerHeight;
+    if (!sticky || !art || !copy) return;
 
     if (!enablePinFX){
+      sticky.style.transform = 'none'; sticky.style.filter = 'none';
       art.style.opacity = 1; art.style.transform = 'none'; art.style.filter = 'none';
       copy.style.opacity = 1; copy.style.transform = 'none';
       return;
     }
 
+    const rect = scene.getBoundingClientRect();
+    const total = rect.height - vh;
     const p = clamp01(-rect.top / Math.max(total, 1));
-    // Enter (0 -> .22): soft scale + blur-to-focus reveal. Hold (.22 -> .78): settled.
-    // Exit (.78 -> 1): gentle drift out as the next scene approaches. No rigid 3D flips —
-    // just a smooth, editorial-style fade/scale/blur, like a modern product page.
+
+    // Entry reveal: soft scale + blur-to-focus as the card first arrives.
+    const enter = clamp01(p / 0.3);
+    const enterEase = 1 - Math.pow(1 - enter, 3);
     const isRev = scene.classList.contains('scene--rev');
     const dir = isRev ? -1 : 1;
 
-    const enter = clamp01(p / 0.22);
-    const exit = clamp01((p - 0.78) / 0.22);
-
-    const enterEase = 1 - Math.pow(1 - enter, 3);
-    const exitEase = exit * exit;
-
-    // Art: soft scale-up + blur clearing + subtle horizontal drift, then ease out
-    const artScale = lerp(0.94, 1, enterEase) - lerp(0, 0.04, exitEase);
-    const artY = lerp(28, 0, enterEase) + lerp(0, -22, exitEase);
-    const artX = lerp(dir * 16, 0, enterEase) + lerp(0, dir * -16, exitEase);
-    const artBlur = lerp(10, 0, enterEase) + lerp(0, 6, exitEase);
-    const artOpacity = Math.max(lerp(0, 1, enter), 0.001) * (1 - exitEase);
-
+    const artScale = lerp(0.92, 1, enterEase);
+    const artY = lerp(30, 0, enterEase);
+    const artX = lerp(dir * 24, 0, enterEase);
+    const artBlur = lerp(14, 0, enterEase);
     art.style.transform = `translate(${artX}px, ${artY}px) scale(${artScale})`;
     art.style.filter = `blur(${artBlur}px)`;
-    art.style.opacity = artOpacity;
+    art.style.opacity = Math.max(enterEase, 0.001);
 
-    // Copy: fade + rise gently, then ease out
-    const copyEnter = clamp01(p / 0.26);
+    const copyEnter = clamp01(p / 0.34);
     const copyEnterEase = 1 - Math.pow(1 - copyEnter, 3);
-    const copyY = lerp(22, 0, copyEnterEase) + lerp(0, -18, exitEase);
-    const copyOpacity = Math.max(lerp(0, 1, copyEnter), 0.001) * (1 - exitEase);
+    copy.style.transform = `translateY(${lerp(24, 0, copyEnterEase)}px)`;
+    copy.style.opacity = Math.max(copyEnterEase, 0.001);
 
-    copy.style.transform = `translateY(${copyY}px)`;
-    copy.style.opacity = copyOpacity;
+    // Stacked-card effect: as the NEXT card slides up and starts covering this one,
+    // this card gently recedes — scales down, dims, and eases back — like a deck of
+    // cards being set aside. No exit animation of its own; being covered IS the exit.
+    const next = scenes[i + 1];
+    let cover = 0;
+    if (next){
+      const nextTop = next.getBoundingClientRect().top;
+      cover = clamp01(1 - nextTop / vh);
+      cover = cover * cover; // ease-in — stays crisp until the next card is really close
+    }
+    const stickyScale = lerp(1, 0.92, cover);
+    const stickyY = lerp(0, -26, cover);
+    const brightness = lerp(1, 0.78, cover);
+    sticky.style.transform = `scale(${stickyScale}) translateY(${stickyY}px)`;
+    sticky.style.filter = `brightness(${brightness})`;
   });
 }
 
