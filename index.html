@@ -324,6 +324,23 @@
         <p class="contact-form__msg" id="contactMsg" role="status" aria-live="polite"></p>
       </div>
     </form>
+
+    <!-- Estado de éxito animado: un "expediente aprobado" en los colores de la marca. -->
+    <div class="contact-success" id="contactSuccess" role="status" aria-live="polite" hidden>
+      <svg class="contact-success__badge" viewBox="0 0 120 120" width="84" height="84" aria-hidden="true">
+        <defs>
+          <linearGradient id="successGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="var(--i2)"/>
+            <stop offset="100%" stop-color="var(--c1)"/>
+          </linearGradient>
+        </defs>
+        <circle class="contact-success__ring" cx="60" cy="60" r="52" fill="none" stroke="url(#successGrad)" stroke-width="6" stroke-linecap="round"/>
+        <path class="contact-success__check" d="M35 61 L52 78 L87 40" fill="none" stroke="url(#successGrad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h3 class="contact-success__title">Consulta enviada</h3>
+      <p class="contact-success__text">Tu expediente ya está en curso: te respondemos por mail o WhatsApp a la brevedad.</p>
+      <button type="button" class="btn btn--outline contact-success__reset" id="contactSuccessReset">Enviar otra consulta</button>
+    </div>
   </div>
 </section>
 

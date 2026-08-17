@@ -217,6 +217,11 @@ onScrollRAF();
     prevBtn.disabled = idx === 0;
     nextBtn.disabled = idx === waypoints.length - 1;
     navEl.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.3);
+    // On mobile the dot strip scrolls horizontally — keep the active one in view.
+    const activeDot = dots[idx];
+    if (activeDot && dotsEl.scrollWidth > dotsEl.clientWidth){
+      activeDot.scrollIntoView({ behavior:'smooth', inline:'center', block:'nearest' });
+    }
   }
 
   prevBtn.addEventListener('click', () => goTo(currentIndex() - 1));
@@ -266,6 +271,25 @@ onScrollRAF();
   const msgEl = document.getElementById('contactMsg');
   const submitBtn = form.querySelector('button[type="submit"]');
   const submitLabel = submitBtn.querySelector('span');
+  const successEl = document.getElementById('contactSuccess');
+  const successResetBtn = document.getElementById('contactSuccessReset');
+
+  function showSuccess(){
+    form.hidden = true;
+    successEl.hidden = false;
+    // Force layout before adding the class so the draw-in transitions actually play.
+    void successEl.offsetWidth;
+    successEl.classList.add('is-in');
+  }
+  function backToForm(){
+    successEl.classList.remove('is-in');
+    successEl.hidden = true;
+    form.hidden = false;
+    form.reset();
+    msgEl.textContent = '';
+    msgEl.className = 'contact-form__msg';
+  }
+  if (successResetBtn) successResetBtn.addEventListener('click', backToForm);
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -292,9 +316,7 @@ onScrollRAF();
       const result = await res.json();
 
       if (result.success){
-        msgEl.textContent = '¡Gracias! Recibimos tu consulta, te respondemos a la brevedad.';
-        msgEl.className = 'contact-form__msg is-ok';
-        form.reset();
+        showSuccess();
       } else {
         throw new Error(result.message || 'No se pudo enviar');
       }
