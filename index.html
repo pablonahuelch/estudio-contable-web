@@ -38,8 +38,9 @@
       <a href="#servicios" class="nav__link">Servicios</a>
       <a href="#proceso" class="nav__link">Cómo trabajamos</a>
       <a href="#equipo" class="nav__link">Equipo</a>
+      <a href="#contacto" class="nav__link">Contacto</a>
     </nav>
-    <a href="#equipo" class="btn btn--dark nav__cta">
+    <a href="#contacto" class="btn btn--dark nav__cta">
       <span>Escribinos</span>
     </a>
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
@@ -86,7 +87,7 @@
   </div>
 </section>
 
-<!-- ================= SERVICIOS (scroll-pinned scenes) ================= -->
+<!-- ================= SERVICIOS (módulos verticales, imagen protagonista) ================= -->
 <section class="services" id="servicios">
   <div class="section-head container">
     <p class="eyebrow"><span class="eyebrow__dot"></span> Qué hacemos</p>
@@ -94,164 +95,132 @@
     <p class="section-sub">Cada servicio está pensado para sacarte tareas de encima y darte información clara para decidir.</p>
   </div>
 
-  <!-- 01 -->
-  <div class="scene" data-scene data-label="Contable e impositivo">
-    <div class="scene__sticky">
-      <div class="container scene__grid">
-        <div class="scene__art" data-scene-art>
-          <div class="scene__frame">
-            <img src="assets/img/services/contable.jpg?v=2" alt="Panel de gestión contable, impositiva y fiscal" loading="lazy">
-          </div>
-        </div>
-        <div class="scene__copy" data-scene-copy>
-          <span class="scene__num">01</span>
-          <h3 class="scene__title">Gestión contable, impositiva y fiscal</h3>
-          <p class="scene__lead">Tu empresa al día, con una gestión clara y ordenada.</p>
-          <ul class="scene__list">
-            <li>Altas, bajas y modificaciones ante ARCA, Rentas y municipios</li>
-            <li>IVA, Ingresos Brutos y Convenio Multilateral</li>
-            <li>Regímenes informativos y presentaciones fiscales</li>
-            <li>Puntos de venta, facturación y controladores fiscales</li>
-            <li>Recategorizaciones y empadronamientos</li>
-            <li>Atención de requerimientos, planes de pago y regularizaciones</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="container services__list">
 
-  <!-- 02 -->
-  <div class="scene scene--rev" data-scene data-label="Sociedades">
-    <div class="scene__sticky">
-      <div class="container scene__grid">
-        <div class="scene__copy" data-scene-copy>
-          <span class="scene__num">02</span>
-          <h3 class="scene__title">Sociedades y gestión empresarial</h3>
-          <p class="scene__lead">Una estructura sólida para hacer crecer tu negocio.</p>
-          <ul class="scene__list">
-            <li>Constitución y regularización de sociedades</li>
-            <li>Modificaciones y trámites societarios</li>
-            <li>Certificados y presentaciones administrativas</li>
-            <li>Organización y documentación empresarial</li>
-            <li>Asesoramiento contable y administrativo</li>
-            <li>Acompañamiento en procesos de crecimiento o reorganización</li>
-          </ul>
-        </div>
-        <div class="scene__art" data-scene-art>
-          <div class="scene__frame">
-            <img src="assets/img/services/sociedades.jpg?v=2" alt="Carpetas de constitución y trámites societarios" loading="lazy">
-          </div>
-        </div>
+    <!-- 01 -->
+    <article class="service-block" data-service data-label="Contable e impositivo">
+      <div class="service-block__media">
+        <img src="assets/img/services/contable.jpg?v=2" alt="Panel de gestión contable, impositiva y fiscal" loading="lazy">
       </div>
-    </div>
-  </div>
+      <div class="service-block__body">
+        <span class="service-block__num">01</span>
+        <h3 class="service-block__title">Gestión contable, impositiva y fiscal</h3>
+        <p class="service-block__lead">Tu empresa al día, con una gestión clara y ordenada.</p>
+        <ul class="service-block__list">
+          <li>Altas, bajas y modificaciones ante ARCA, Rentas y municipios</li>
+          <li>IVA, Ingresos Brutos y Convenio Multilateral</li>
+          <li>Regímenes informativos y presentaciones fiscales</li>
+          <li>Puntos de venta, facturación y controladores fiscales</li>
+          <li>Recategorizaciones y empadronamientos</li>
+          <li>Atención de requerimientos, planes de pago y regularizaciones</li>
+        </ul>
+      </div>
+    </article>
 
-  <!-- 03 -->
-  <div class="scene" data-scene data-label="Sueldos y laboral">
-    <div class="scene__sticky">
-      <div class="container scene__grid">
-        <div class="scene__art" data-scene-art>
-          <div class="scene__frame">
-            <img src="assets/img/services/sueldos.jpg?v=2" alt="Panel de liquidación de sueldos y cargas sociales" loading="lazy">
-          </div>
-        </div>
-        <div class="scene__copy" data-scene-copy>
-          <span class="scene__num">03</span>
-          <h3 class="scene__title">Sueldos y gestión laboral</h3>
-          <p class="scene__lead">Tu equipo administrado de forma simple y ordenada.</p>
-          <ul class="scene__list">
-            <li>Liquidación de sueldos y cargas sociales</li>
-            <li>Altas, bajas y novedades del personal</li>
-            <li>Convenios colectivos de trabajo</li>
-            <li>Libro Sueldo Digital</li>
-            <li>Emisión de recibos</li>
-            <li>Armado y administración de legajos</li>
-          </ul>
-        </div>
+    <!-- 02 -->
+    <article class="service-block" data-service data-label="Sociedades">
+      <div class="service-block__media">
+        <img src="assets/img/services/sociedades.jpg?v=2" alt="Carpetas de constitución y trámites societarios" loading="lazy">
       </div>
-    </div>
-  </div>
+      <div class="service-block__body">
+        <span class="service-block__num">02</span>
+        <h3 class="service-block__title">Sociedades y gestión empresarial</h3>
+        <p class="service-block__lead">Una estructura sólida para hacer crecer tu negocio.</p>
+        <ul class="service-block__list">
+          <li>Constitución y regularización de sociedades</li>
+          <li>Modificaciones y trámites societarios</li>
+          <li>Certificados y presentaciones administrativas</li>
+          <li>Organización y documentación empresarial</li>
+          <li>Asesoramiento contable y administrativo</li>
+          <li>Acompañamiento en procesos de crecimiento o reorganización</li>
+        </ul>
+      </div>
+    </article>
 
-  <!-- 04 -->
-  <div class="scene scene--rev" data-scene data-label="Financiero y bancario">
-    <div class="scene__sticky">
-      <div class="container scene__grid">
-        <div class="scene__copy" data-scene-copy>
-          <span class="scene__num">04</span>
-          <h3 class="scene__title">Gestión financiera y bancaria</h3>
-          <p class="scene__lead">Tus números preparados para decidir y acceder a nuevas oportunidades.</p>
-          <ul class="scene__list">
-            <li>Armado y actualización de carpetas bancarias</li>
-            <li>Manifestaciones de bienes e ingresos</li>
-            <li>Preparación de documentación económica y financiera</li>
-            <li>Gestión y seguimiento de préstamos y líneas de crédito</li>
-            <li>Presentaciones y trámites ante entidades bancarias</li>
-            <li>Análisis de información financiera y flujos de fondos</li>
-            <li>Reportes para seguimiento y toma de decisiones</li>
-          </ul>
-        </div>
-        <div class="scene__art" data-scene-art>
-          <div class="scene__frame">
-            <img src="assets/img/services/financiera.jpg?v=2" alt="Dashboard de flujo de fondos y patrimonio neto" loading="lazy">
-          </div>
-        </div>
+    <!-- 03 -->
+    <article class="service-block" data-service data-label="Sueldos y laboral">
+      <div class="service-block__media">
+        <img src="assets/img/services/sueldos.jpg?v=2" alt="Panel de liquidación de sueldos y cargas sociales" loading="lazy">
       </div>
-    </div>
-  </div>
+      <div class="service-block__body">
+        <span class="service-block__num">03</span>
+        <h3 class="service-block__title">Sueldos y gestión laboral</h3>
+        <p class="service-block__lead">Tu equipo administrado de forma simple y ordenada.</p>
+        <ul class="service-block__list">
+          <li>Liquidación de sueldos y cargas sociales</li>
+          <li>Altas, bajas y novedades del personal</li>
+          <li>Convenios colectivos de trabajo</li>
+          <li>Libro Sueldo Digital</li>
+          <li>Emisión de recibos</li>
+          <li>Armado y administración de legajos</li>
+        </ul>
+      </div>
+    </article>
 
-  <!-- 05 -->
-  <div class="scene" data-scene data-label="Automatización">
-    <div class="scene__sticky">
-      <div class="container scene__grid">
-        <div class="scene__art" data-scene-art>
-          <div class="scene__frame">
-            <img src="assets/img/services/automatizacion.jpg?v=2" alt="Dashboard de automatización de procesos y reportes" loading="lazy">
-          </div>
-        </div>
-        <div class="scene__copy" data-scene-copy>
-          <span class="scene__num">05</span>
-          <h3 class="scene__title">Automatización y soluciones digitales</h3>
-          <p class="scene__lead">Tecnología aplicada para simplificar la gestión de tu empresa.</p>
-          <ul class="scene__list">
-            <li>Automatización de procesos administrativos y contables</li>
-            <li>Desarrollo de herramientas y sistemas a medida</li>
-            <li>Integración de procesos y fuentes de información</li>
-            <li>Dashboards y tableros de gestión</li>
-            <li>Automatización de reportes y controles</li>
-            <li>Digitalización de circuitos administrativos</li>
-            <li>Desarrollo de plataformas y soluciones web</li>
-            <li>Optimización de procesos mediante tecnología</li>
-          </ul>
-        </div>
+    <!-- 04 -->
+    <article class="service-block" data-service data-label="Financiero y bancario">
+      <div class="service-block__media">
+        <img src="assets/img/services/financiera.jpg?v=2" alt="Dashboard de flujo de fondos y patrimonio neto" loading="lazy">
       </div>
-    </div>
-  </div>
+      <div class="service-block__body">
+        <span class="service-block__num">04</span>
+        <h3 class="service-block__title">Gestión financiera y bancaria</h3>
+        <p class="service-block__lead">Tus números preparados para decidir y acceder a nuevas oportunidades.</p>
+        <ul class="service-block__list">
+          <li>Armado y actualización de carpetas bancarias</li>
+          <li>Manifestaciones de bienes e ingresos</li>
+          <li>Preparación de documentación económica y financiera</li>
+          <li>Gestión y seguimiento de préstamos y líneas de crédito</li>
+          <li>Presentaciones y trámites ante entidades bancarias</li>
+          <li>Análisis de información financiera y flujos de fondos</li>
+          <li>Reportes para seguimiento y toma de decisiones</li>
+        </ul>
+      </div>
+    </article>
 
-  <!-- 06 -->
-  <div class="scene scene--rev" data-scene data-label="Sector minero">
-    <div class="scene__sticky">
-      <div class="container scene__grid">
-        <div class="scene__copy" data-scene-copy>
-          <span class="scene__num">06</span>
-          <h3 class="scene__title">Empresas y proveedores mineros</h3>
-          <p class="scene__lead">Acompañamiento especializado para operar en el sector minero.</p>
-          <ul class="scene__list">
-            <li>Inscripción y actualización en registros de proveedores</li>
-            <li>Gestión de plataformas y portales mineros</li>
-            <li>Armado de carpetas empresariales</li>
-            <li>Documentación administrativa y técnica</li>
-            <li>Presentación y seguimiento de licitaciones</li>
-            <li>Cumplimiento documental</li>
-            <li>Seguimiento administrativo de contratos y operaciones</li>
-          </ul>
-        </div>
-        <div class="scene__art" data-scene-art>
-          <div class="scene__frame">
-            <img src="assets/img/services/mineros.jpg?v=2" alt="Checklist de gestión para proveedores mineros" loading="lazy">
-          </div>
-        </div>
+    <!-- 05 -->
+    <article class="service-block" data-service data-label="Automatización">
+      <div class="service-block__media">
+        <img src="assets/img/services/automatizacion.jpg?v=2" alt="Dashboard de automatización de procesos y reportes" loading="lazy">
       </div>
-    </div>
+      <div class="service-block__body">
+        <span class="service-block__num">05</span>
+        <h3 class="service-block__title">Automatización y soluciones digitales</h3>
+        <p class="service-block__lead">Tecnología aplicada para simplificar la gestión de tu empresa.</p>
+        <ul class="service-block__list">
+          <li>Automatización de procesos administrativos y contables</li>
+          <li>Desarrollo de herramientas y sistemas a medida</li>
+          <li>Integración de procesos y fuentes de información</li>
+          <li>Dashboards y tableros de gestión</li>
+          <li>Automatización de reportes y controles</li>
+          <li>Digitalización de circuitos administrativos</li>
+          <li>Desarrollo de plataformas y soluciones web</li>
+          <li>Optimización de procesos mediante tecnología</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- 06 -->
+    <article class="service-block" data-service data-label="Sector minero">
+      <div class="service-block__media">
+        <img src="assets/img/services/mineros.jpg?v=2" alt="Checklist de gestión para proveedores mineros" loading="lazy">
+      </div>
+      <div class="service-block__body">
+        <span class="service-block__num">06</span>
+        <h3 class="service-block__title">Empresas y proveedores mineros</h3>
+        <p class="service-block__lead">Acompañamiento especializado para operar en el sector minero.</p>
+        <ul class="service-block__list">
+          <li>Inscripción y actualización en registros de proveedores</li>
+          <li>Gestión de plataformas y portales mineros</li>
+          <li>Armado de carpetas empresariales</li>
+          <li>Documentación administrativa y técnica</li>
+          <li>Presentación y seguimiento de licitaciones</li>
+          <li>Cumplimiento documental</li>
+          <li>Seguimiento administrativo de contratos y operaciones</li>
+        </ul>
+      </div>
+    </article>
+
   </div>
 </section>
 
@@ -318,8 +287,48 @@
   </div>
 </section>
 
+<!-- ================= CONTACTO ================= -->
+<section class="contact" id="contacto" data-label="Contacto">
+  <div class="container">
+    <div class="section-head reveal" data-reveal>
+      <p class="eyebrow"><span class="eyebrow__dot"></span> Contacto</p>
+      <h2 class="section-title">Contactate <span class="grad-text">con nosotros.</span></h2>
+      <p class="section-sub">Contanos tu consulta y te respondemos a la brevedad por mail o WhatsApp.</p>
+    </div>
+
+    <form class="contact-form reveal" data-reveal id="contactForm">
+      <!-- Formulario sin backend propio: usa Web3Forms (gratis, web3forms.com). -->
+      <input type="hidden" name="access_key" value="7fdae54c-0532-46d7-8004-b94e50591a34">
+      <input type="hidden" name="subject" value="Nueva consulta desde la web de CPN²">
+      <input type="hidden" name="from_name" value="Web CPN² · Formulario de contacto">
+      <input type="checkbox" name="botcheck" class="contact-form__hp" tabindex="-1" autocomplete="off">
+
+      <div class="contact-form__row">
+        <div class="contact-form__field">
+          <label for="cf-name">Nombre completo</label>
+          <input type="text" id="cf-name" name="name" required placeholder="Tu nombre y apellido">
+        </div>
+        <div class="contact-form__field">
+          <label for="cf-email">Mail</label>
+          <input type="email" id="cf-email" name="email" required placeholder="tu@email.com">
+        </div>
+      </div>
+
+      <div class="contact-form__field">
+        <label for="cf-message">Tu consulta</label>
+        <textarea id="cf-message" name="message" rows="5" required placeholder="Contanos en qué te podemos ayudar..."></textarea>
+      </div>
+
+      <div class="contact-form__footer">
+        <button type="submit" class="btn btn--primary magnetic"><span>Enviar Consulta</span></button>
+        <p class="contact-form__msg" id="contactMsg" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+  </div>
+</section>
+
 <!-- ================= FOOTER ================= -->
-<footer class="footer" id="contacto">
+<footer class="footer">
   <div class="container footer__inner">
     <div class="footer__brand">
       <div class="brand">

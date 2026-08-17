@@ -138,71 +138,10 @@ function updateHero(){
   if (heroCue){ heroCue.style.opacity = 1 - clamp01(p / 0.15); }
 }
 
-// ---- Service scenes: pinned 3D reveal ----
-const scenes = document.querySelectorAll('[data-scene]');
-
-function updateScenes(){
-  const vh = window.innerHeight;
-
-  scenes.forEach((scene, i) => {
-    const sticky = scene.querySelector('.scene__sticky');
-    const art = scene.querySelector('[data-scene-art]');
-    const copy = scene.querySelector('[data-scene-copy]');
-    if (!sticky || !art || !copy) return;
-
-    if (!enablePinFX){
-      sticky.style.transform = 'none'; sticky.style.filter = 'none';
-      art.style.opacity = 1; art.style.transform = 'none'; art.style.filter = 'none';
-      copy.style.opacity = 1; copy.style.transform = 'none';
-      return;
-    }
-
-    const rect = scene.getBoundingClientRect();
-    const total = rect.height - vh;
-    const p = clamp01(-rect.top / Math.max(total, 1));
-
-    // Entry reveal: soft scale + blur-to-focus as the card first arrives.
-    const enter = clamp01(p / 0.3);
-    const enterEase = 1 - Math.pow(1 - enter, 3);
-    const isRev = scene.classList.contains('scene--rev');
-    const dir = isRev ? -1 : 1;
-
-    const artScale = lerp(0.92, 1, enterEase);
-    const artY = lerp(30, 0, enterEase);
-    const artX = lerp(dir * 24, 0, enterEase);
-    const artBlur = lerp(14, 0, enterEase);
-    art.style.transform = `translate(${artX}px, ${artY}px) scale(${artScale})`;
-    art.style.filter = `blur(${artBlur}px)`;
-    art.style.opacity = Math.max(enterEase, 0.001);
-
-    const copyEnter = clamp01(p / 0.34);
-    const copyEnterEase = 1 - Math.pow(1 - copyEnter, 3);
-    copy.style.transform = `translateY(${lerp(24, 0, copyEnterEase)}px)`;
-    copy.style.opacity = Math.max(copyEnterEase, 0.001);
-
-    // Stacked-card effect: as the NEXT card slides up and starts covering this one,
-    // this card gently recedes — scales down, dims, and eases back — like a deck of
-    // cards being set aside. No exit animation of its own; being covered IS the exit.
-    const next = scenes[i + 1];
-    let cover = 0;
-    if (next){
-      const nextTop = next.getBoundingClientRect().top;
-      cover = clamp01(1 - nextTop / vh);
-      cover = cover * cover; // ease-in — stays crisp until the next card is really close
-    }
-    const stickyScale = lerp(1, 0.92, cover);
-    const stickyY = lerp(0, -26, cover);
-    const brightness = lerp(1, 0.78, cover);
-    sticky.style.transform = `scale(${stickyScale}) translateY(${stickyY}px)`;
-    sticky.style.filter = `brightness(${brightness})`;
-  });
-}
-
 let ticking = false;
 function onScrollRAF(){
   headerScroll();
   updateHero();
-  updateScenes();
   ticking = false;
 }
 window.addEventListener('scroll', () => {
@@ -245,17 +184,19 @@ onScrollRAF();
     index = Math.max(0, Math.min(waypoints.length - 1, index));
     const el = waypoints[index];
     const absoluteTop = el.getBoundingClientRect().top + window.scrollY;
-    const isPinnedScene = el.classList.contains('scene');
     let top;
-    if (isPinnedScene && enablePinFX){
-      // Land inside the "hold" plateau of the pin range, where content is
-      // fully settled and visible — not at the exact top, which is mid-animation.
-      const pinTotal = el.offsetHeight - window.innerHeight;
-      top = absoluteTop + Math.max(pinTotal, 0) * 0.5;
-    } else if (el.classList.contains('hero-pin')){
+    if (el.classList.contains('hero-pin')){
       top = 0;
     } else {
-      top = absoluteTop - headerOffset;
+      const elHeight = el.offsetHeight;
+      const available = window.innerHeight - headerOffset;
+      if (elHeight <= available){
+        // Center the whole element (image + text together) in the visible area,
+        // below the fixed header, instead of just aligning its top edge.
+        top = absoluteTop - headerOffset - (available - elHeight) / 2;
+      } else {
+        top = absoluteTop - headerOffset;
+      }
     }
     window.scrollTo({ top, behavior:'smooth' });
   }
@@ -285,4 +226,84 @@ onScrollRAF();
   window.addEventListener('scroll', refresh, { passive:true });
   window.addEventListener('resize', refresh);
   refresh();
+})();
+
+/* =========================================================
+   SERVICES — módulos verticales grandes. Cada uno entra con
+   la cortina en degradé de marca deslizándose de la imagen y
+   el texto apareciendo en cascada, la primera vez que se ve.
+========================================================= */
+(function(){
+  const blocks = document.querySelectorAll('[data-service]');
+  if (!blocks.length) return;
+
+  if (reduceMotion){
+    blocks.forEach(b => b.classList.add('is-in'));
+    return;
+  }
+
+  const serviceObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('is-in');
+        serviceObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold:0.25, rootMargin:'0px 0px -80px 0px' });
+
+  blocks.forEach(b => serviceObserver.observe(b));
+})();
+
+/* =========================================================
+   CONTACT FORM — envío de mail sin backend propio, vía
+   Web3Forms (https://web3forms.com). Requiere reemplazar el
+   access_key hidden input en el HTML por el de tu cuenta.
+========================================================= */
+(function(){
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+
+  const msgEl = document.getElementById('contactMsg');
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const submitLabel = submitBtn.querySelector('span');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const accessKey = form.querySelector('[name="access_key"]').value;
+    if (!accessKey || accessKey.includes('REEMPLAZAR')){
+      msgEl.textContent = 'Falta configurar el Access Key de Web3Forms en el HTML.';
+      msgEl.className = 'contact-form__msg is-error';
+      return;
+    }
+
+    submitBtn.disabled = true;
+    const originalLabel = submitLabel.textContent;
+    submitLabel.textContent = 'Enviando...';
+    msgEl.textContent = '';
+    msgEl.className = 'contact-form__msg';
+
+    try{
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      });
+      const result = await res.json();
+
+      if (result.success){
+        msgEl.textContent = '¡Gracias! Recibimos tu consulta, te respondemos a la brevedad.';
+        msgEl.className = 'contact-form__msg is-ok';
+        form.reset();
+      } else {
+        throw new Error(result.message || 'No se pudo enviar');
+      }
+    } catch (err){
+      msgEl.textContent = 'Hubo un error al enviar. Probá de nuevo o escribinos por WhatsApp.';
+      msgEl.className = 'contact-form__msg is-error';
+    } finally {
+      submitBtn.disabled = false;
+      submitLabel.textContent = originalLabel;
+    }
+  });
 })();
