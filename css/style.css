@@ -468,3 +468,6 @@ svg{ display:block; }
   .contact-form__row{ grid-template-columns:1fr; }
   .contact-form__footer{ flex-direction:column; align-items:flex-start; }
 }
+
+/* Oculta el cuadro de éxito y el formulario cuando tienen el atributo hidden */
+.contact-success[hidden], .contact-form[hidden]{ display:none !important; }
