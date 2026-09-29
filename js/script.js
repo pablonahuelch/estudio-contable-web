@@ -276,7 +276,9 @@ onScrollRAF();
 
   function showSuccess(){
     form.hidden = true;
+    form.style.display = 'none';
     successEl.hidden = false;
+    successEl.style.display = '';
     // Force layout before adding the class so the draw-in transitions actually play.
     void successEl.offsetWidth;
     successEl.classList.add('is-in');
@@ -284,7 +286,9 @@ onScrollRAF();
   function backToForm(){
     successEl.classList.remove('is-in');
     successEl.hidden = true;
+    successEl.style.display = 'none';
     form.hidden = false;
+    form.style.display = '';
     form.reset();
     msgEl.textContent = '';
     msgEl.className = 'contact-form__msg';
